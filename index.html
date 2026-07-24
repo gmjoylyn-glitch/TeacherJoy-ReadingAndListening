@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎯 Emotions & Jobs - Spelling with AI Voice</title>
+    <title>👦👧 Boys vs Girls - Spelling Challenge</title>
     <style>
         /* ===== MAIN STYLING ===== */
         * {
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
-            background: linear-gradient(145deg, #1a2a3a, #2c4a5a);
+            background: linear-gradient(145deg, #0f1a2b, #1a2a3a);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -26,44 +26,50 @@
             background: #fef9f0;
             border-radius: 60px 60px 30px 30px;
             padding: 25px 25px 35px;
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.8);
             border: 6px solid #e8c99b;
         }
 
         .banner {
-            background: #ffd966;
-            padding: 10px 18px;
+            background: linear-gradient(90deg, #4a90d9, #ff6b6b);
+            padding: 12px 18px;
             border-radius: 50px;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #2d1b0e;
+            color: white;
             margin-top: -45px;
             margin-bottom: 15px;
             border: 4px solid #b8860b;
             box-shadow: 0 6px 0 #b8860b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .banner span {
-            background: #2d1b0e;
-            color: #ffd966;
-            padding: 2px 14px;
+            background: rgba(0,0,0,0.3);
+            padding: 2px 16px;
             border-radius: 30px;
-            margin: 0 5px;
         }
 
         .banner .music-toggle {
-            background: #2d1b0e;
-            color: #ffd966;
-            border: none;
-            padding: 2px 16px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 4px 16px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1rem;
             font-family: inherit;
-            margin-left: 8px;
+        }
+
+        .banner .music-toggle:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         h1 {
@@ -91,25 +97,49 @@
             text-align: center;
         }
 
-        .stats {
+        /* Team Score Board */
+        .team-scores {
             display: flex;
             justify-content: space-between;
-            background: #2d1b0e;
-            padding: 12px 22px;
-            border-radius: 60px;
-            color: #f1faee;
-            font-size: 1.1rem;
-            font-weight: bold;
+            gap: 15px;
             margin: 8px 0 15px;
-            border: 3px solid #e9c46a;
-            flex-wrap: wrap;
-            gap: 6px;
         }
 
-        .stats span {
-            background: #4a3222;
-            padding: 2px 16px;
-            border-radius: 40px;
+        .team-card {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 4px solid;
+            min-width: 120px;
+        }
+
+        .team-boys {
+            background: #d4e6f5;
+            border-color: #4a90d9;
+            color: #1a3a5a;
+        }
+
+        .team-girls {
+            background: #f8d4e6;
+            border-color: #ff6b6b;
+            color: #5a1a2a;
+        }
+
+        .team-card .team-score {
+            font-size: 2rem;
+            display: block;
+        }
+
+        .team-card .team-label {
+            font-size: 0.9rem;
+        }
+
+        .team-card.active-team {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            transform: scale(1.02);
         }
 
         .main-area {
@@ -120,8 +150,8 @@
 
         /* LEFT: Picture Grid */
         .picture-container {
-            flex: 1.2;
-            min-width: 280px;
+            flex: 1.3;
+            min-width: 300px;
             background: #d9c9b0;
             padding: 18px 15px;
             border-radius: 40px;
@@ -132,7 +162,6 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            aspect-ratio: 4 / 4;
         }
 
         .cell {
@@ -151,6 +180,7 @@
             position: relative;
             user-select: none;
             padding: 4px;
+            min-height: 100px;
         }
 
         .cell:active {
@@ -159,31 +189,50 @@
         }
 
         .cell .label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: bold;
             color: #3d2b1f;
-            background: rgba(255,255,255,0.8);
-            padding: 2px 10px;
+            background: rgba(255,255,255,0.85);
+            padding: 2px 8px;
             border-radius: 20px;
             margin-top: 2px;
             text-align: center;
             max-width: 100%;
         }
 
-        .cell.colored {
-            background: #b8e6c8;
-            border-color: #2a9d8f;
-            box-shadow: 0 4px 0 #1f6d62;
+        .cell .team-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            font-size: 1.2rem;
+            background: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #4a2c1b;
+        }
+
+        .cell.colored-boy {
+            background: #b8d4f0;
+            border-color: #4a90d9;
+            box-shadow: 0 4px 0 #3a70a9;
             transform: translateY(2px);
             cursor: default;
-            opacity: 0.85;
         }
 
-        .cell.colored .label {
-            background: rgba(42, 157, 143, 0.3);
+        .cell.colored-girl {
+            background: #f5c8d8;
+            border-color: #ff6b6b;
+            box-shadow: 0 4px 0 #c94a4a;
+            transform: translateY(2px);
+            cursor: default;
         }
 
-        .cell.colored::after {
+        .cell.colored-boy::after,
+        .cell.colored-girl::after {
             content: '✅';
             position: absolute;
             top: -8px;
@@ -196,14 +245,14 @@
         }
 
         .cell.locked {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: translateY(2px);
             box-shadow: 0 2px 0 #4a2c1b;
         }
 
         .cell .speaker-icon {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             background: #2d1b0e;
             color: white;
             border-radius: 50%;
@@ -216,6 +265,11 @@
             bottom: 4px;
             right: 4px;
             font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .cell .speaker-icon:hover {
+            background: #4a3222;
         }
 
         .cell.speaking {
@@ -300,16 +354,16 @@
         }
 
         .question-text .listen-btn {
-            background: #2a9d8f;
+            background: #4a90d9;
             color: white;
             border: none;
-            padding: 6px 20px;
+            padding: 8px 24px;
             border-radius: 30px;
             font-size: 1rem;
             cursor: pointer;
             font-family: inherit;
             margin-top: 4px;
-            border-bottom: 4px solid #1f6d62;
+            border-bottom: 4px solid #3a70a9;
             transition: 0.1s;
         }
 
@@ -419,6 +473,18 @@
             color: #1a3a5a;
         }
 
+        .feedback.team-boy {
+            background: #b8d4f0;
+            border-color: #4a90d9;
+            color: #1a3a5a;
+        }
+
+        .feedback.team-girl {
+            background: #f5c8d8;
+            border-color: #ff6b6b;
+            color: #5a1a2a;
+        }
+
         .progress-bar {
             background: #d9c9b0;
             border-radius: 30px;
@@ -430,7 +496,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #2a9d8f, #6bbf8a);
+            background: linear-gradient(90deg, #4a90d9, #ff6b6b);
             border-radius: 30px;
             width: 0%;
             transition: width 0.4s ease;
@@ -466,6 +532,8 @@
         .btn-green { background: #2a9d8f; border-bottom-color: #1f6d62; }
         .btn-orange { background: #e76f51; border-bottom-color: #b85a3f; }
         .btn-purple { background: #6d597a; border-bottom-color: #4a3a54; }
+        .btn-blue { background: #4a90d9; border-bottom-color: #3a70a9; }
+        .btn-pink { background: #ff6b6b; border-bottom-color: #c94a4a; }
 
         .footer {
             text-align: center;
@@ -479,7 +547,7 @@
 
         .legend {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 10px;
@@ -489,17 +557,100 @@
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             background: #eddcd2;
-            padding: 3px 12px;
+            padding: 3px 14px;
             border-radius: 20px;
         }
 
         .legend-color {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 2px solid #4a2c1b;
+        }
+
+        .legend-boy { background: #4a90d9; }
+        .legend-girl { background: #ff6b6b; }
+
+        /* Turn indicator */
+        .turn-indicator {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 6px;
+            border-radius: 30px;
+            margin-bottom: 8px;
+        }
+
+        .turn-boy {
+            background: #b8d4f0;
+            color: #1a3a5a;
+        }
+
+        .turn-girl {
+            background: #f5c8d8;
+            color: #5a1a2a;
+        }
+
+        /* Winner Modal */
+        .winner-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .winner-overlay.show {
+            display: flex;
+        }
+
+        .winner-modal {
+            background: #fef9f0;
+            padding: 40px 50px;
+            border-radius: 60px;
+            text-align: center;
+            max-width: 500px;
+            border: 6px solid #ffd700;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
+            animation: pop 0.6s ease;
+        }
+
+        .winner-modal .trophy {
+            font-size: 5rem;
+        }
+
+        .winner-modal h2 {
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+
+        .winner-modal .sub-text {
+            font-size: 1.2rem;
+            color: #5c4033;
+        }
+
+        .winner-modal .final-scores {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+        }
+
+        .winner-modal .final-scores .score-num {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .winner-modal .btn {
+            margin-top: 10px;
         }
 
         @media (max-width: 700px) {
@@ -507,10 +658,11 @@
                 flex-direction: column;
             }
             .grid {
-                aspect-ratio: 4 / 4;
+                grid-template-columns: repeat(4, 1fr);
             }
             .cell {
                 font-size: 2rem;
+                min-height: 80px;
             }
             .question-text {
                 font-size: 1.1rem;
@@ -520,28 +672,62 @@
                 font-size: 1rem;
                 padding: 10px 16px;
             }
+            .team-scores {
+                flex-direction: row;
+            }
+            .team-card {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+            .team-card .team-score {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
+<!-- Winner Modal -->
+<div class="winner-overlay" id="winnerOverlay">
+    <div class="winner-modal">
+        <div class="trophy" id="winnerEmoji">🏆</div>
+        <h2 id="winnerTitle">🎉 Team Wins!</h2>
+        <div class="final-scores">
+            <div>👦 Boys: <span class="score-num" id="finalBoyScore">0</span></div>
+            <div>👧 Girls: <span class="score-num" id="finalGirlScore">0</span></div>
+        </div>
+        <div class="sub-text" id="winnerMessage">Amazing spelling skills!</div>
+        <button class="btn btn-green" onclick="resetGame()">🔄 Play Again</button>
+    </div>
+</div>
+
 <div class="game-wrapper">
 
     <div class="banner">
-        🎤 AI Voice Says It! <span>You Spell It!</span> 🎮
+        👦 Boys vs Girls 👧
+        <span>🎤 AI Voice Says It!</span>
         <button class="music-toggle" id="musicToggle">🔊 Music On</button>
     </div>
 
-    <h1>🎯 Emotions & Jobs</h1>
+    <h1>📝 Spelling Challenge</h1>
     <div class="sub-wrap">
-        <div class="sub">👂 Listen to the AI voice, then pick the correct spelling!</div>
+        <div class="sub">👂 Listen to the AI voice, choose the correct spelling!</div>
     </div>
 
-    <div class="stats">
-        <div>⭐ Score: <span id="scoreDisplay">0</span></div>
-        <div>✅ Completed: <span id="coloredDisplay">0/16</span></div>
-        <div>📊 Progress: <span id="progressPercent">0%</span></div>
+    <!-- Team Scores -->
+    <div class="team-scores">
+        <div class="team-card team-boys active-team" id="boysCard">
+            <span class="team-label">👦 BOYS</span>
+            <span class="team-score" id="boysScore">0</span>
+        </div>
+        <div class="team-card team-girls" id="girlsCard">
+            <span class="team-label">👧 GIRLS</span>
+            <span class="team-score" id="girlsScore">0</span>
+        </div>
     </div>
+
+    <!-- Turn Indicator -->
+    <div class="turn-indicator turn-boy" id="turnIndicator">👦 Boys' Turn</div>
 
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
@@ -581,21 +767,21 @@
                     🟢 Easy · 🟡 Average · 🔴 Difficult
                 </div>
                 <div class="controls">
+                    <button class="btn btn-blue" id="switchTeamBtn">🔄 Switch Turn</button>
                     <button class="btn btn-green" id="resetBtn">🔄 New Game</button>
-                    <button class="btn btn-orange" id="skipBtn">⏭️ Skip</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        🌟 Listen 👂 → Choose the correct spelling ✏️ → Win! &nbsp;|&nbsp; Grade 4 🧒
+        🌟 Listen 👂 → Choose the correct spelling ✏️ → Score for your team! &nbsp;|&nbsp; Grade 4 🧒
     </div>
 </div>
 
 <script>
     // ============================================================
-    //  EMOTIONS & JOBS - SPELLING QUIZ with AI VOICE
+    //  BOYS VS GIRLS - SPELLING CHALLENGE with AI VOICE
     //  Grade 4 - Listen, Choose the Correct Spelling
     // ============================================================
 
@@ -707,31 +893,17 @@
         }
     ];
 
-    // ---------- COLORS FOR THE PICTURE ----------
-    const COLOR_MAP = {};
-    QUESTION_BANK.forEach((q, idx) => {
-        const colors = ['#f4c542','#f4a261','#457b9d','#6bbf8a','#b58a6b','#e9c46a','#f8f0e0','#d4a0a0'];
-        const colors2 = ['#e6b0b0','#f5cba0','#f7dc6f','#f0b27a'];
-        const colors3 = ['#82e0aa','#d7bde2','#5dade2','#f1948a'];
-        let color;
-        if (q.category === 'easy') color = colors[idx % 8];
-        else if (q.category === 'average') color = colors2[(idx - 8) % 4];
-        else color = colors3[(idx - 12) % 4];
-        COLOR_MAP[q.id] = color;
-    });
-
-    const EMOJI_MAP = {};
-    QUESTION_BANK.forEach(q => { EMOJI_MAP[q.id] = q.emoji; });
-
     // ---------- GAME STATE ----------
     let gridData = [];
     let currentCellIndex = null;
     let currentQuestion = null;
-    let score = 0;
+    let boysScore = 0;
+    let girlsScore = 0;
     let coloredCount = 0;
     const TOTAL_CELLS = 16;
     let gameComplete = false;
     let isAnswering = false;
+    let currentTeam = 'boys'; // 'boys' or 'girls'
     let isMusicOn = true;
     let audioContext = null;
     let musicInterval = null;
@@ -739,9 +911,8 @@
     // DOM refs
     const gridContainer = document.getElementById('gridContainer');
     const legendContainer = document.getElementById('legendContainer');
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const coloredDisplay = document.getElementById('coloredDisplay');
-    const progressPercent = document.getElementById('progressPercent');
+    const boysScoreDisplay = document.getElementById('boysScore');
+    const girlsScoreDisplay = document.getElementById('girlsScore');
     const progressFill = document.getElementById('progressFill');
     const cellNumberDisplay = document.getElementById('cellNumberDisplay');
     const difficultyBadge = document.getElementById('difficultyBadge');
@@ -749,6 +920,10 @@
     const optionsContainer = document.getElementById('optionsContainer');
     const feedbackBox = document.getElementById('feedbackBox');
     const musicToggle = document.getElementById('musicToggle');
+    const turnIndicator = document.getElementById('turnIndicator');
+    const boysCard = document.getElementById('boysCard');
+    const girlsCard = document.getElementById('girlsCard');
+    const winnerOverlay = document.getElementById('winnerOverlay');
 
     // ---------- AI VOICE (Web Speech API) ----------
 
@@ -758,16 +933,14 @@
             return;
         }
 
-        // Cancel any ongoing speech
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = 'en-US';
-        utterance.rate = 0.9;
+        utterance.rate = 0.85;
         utterance.pitch = 1;
         utterance.volume = 1;
 
-        // Try to find a good female voice
         const voices = window.speechSynthesis.getVoices();
         const femaleVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Female')) || 
                            voices.find(v => v.lang === 'en-US') || 
@@ -781,14 +954,13 @@
         window.speechSynthesis.speak(utterance);
     }
 
-    // ---------- BACKGROUND MUSIC (Using Web Audio API) ----------
+    // ---------- BACKGROUND MUSIC ----------
 
     function initAudio() {
         try {
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
         } catch (e) {
             console.log('Audio not supported');
-            return;
         }
     }
 
@@ -810,7 +982,6 @@
         if (!isMusicOn) return;
 
         let noteIndex = 0;
-        // Simple happy melody (C major)
         const melody = [523, 587, 659, 523, 587, 659, 523, 587, 659, 784, 659, 587];
         const durations = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
 
@@ -825,16 +996,14 @@
 
                 osc.type = 'sine';
                 osc.frequency.value = melody[noteIndex % melody.length];
-                gain.gain.setValueAtTime(0.08, audioContext.currentTime);
+                gain.gain.setValueAtTime(0.06, audioContext.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + durations[noteIndex % durations.length]);
 
                 osc.start(audioContext.currentTime);
                 osc.stop(audioContext.currentTime + durations[noteIndex % durations.length]);
 
                 noteIndex++;
-            } catch (e) {
-                // Silently handle audio errors
-            }
+            } catch (e) {}
         }
 
         playNote();
@@ -880,11 +1049,24 @@
     }
 
     function updateStats() {
-        scoreDisplay.textContent = score;
-        coloredDisplay.textContent = `${coloredCount}/${TOTAL_CELLS}`;
+        boysScoreDisplay.textContent = boysScore;
+        girlsScoreDisplay.textContent = girlsScore;
         const pct = Math.round((coloredCount / TOTAL_CELLS) * 100);
-        progressPercent.textContent = `${pct}%`;
         progressFill.style.width = `${pct}%`;
+    }
+
+    function updateTurn() {
+        if (currentTeam === 'boys') {
+            turnIndicator.textContent = '👦 Boys\' Turn';
+            turnIndicator.className = 'turn-indicator turn-boy';
+            boysCard.classList.add('active-team');
+            girlsCard.classList.remove('active-team');
+        } else {
+            turnIndicator.textContent = '👧 Girls\' Turn';
+            turnIndicator.className = 'turn-indicator turn-girl';
+            girlsCard.classList.add('active-team');
+            boysCard.classList.remove('active-team');
+        }
     }
 
     function setFeedback(text, type = 'info') {
@@ -892,157 +1074,15 @@
         feedbackBox.className = `feedback ${type}`;
     }
 
-    // ---------- GENERATE GRID ----------
-
-    function generateGrid() {
-        let allIds = QUESTION_BANK.map(q => q.id);
-        let shuffled = shuffleArray([...allIds]);
-        shuffled = shuffled.slice(0, TOTAL_CELLS);
-
-        gridData = shuffled.map((qId, index) => ({
-            index: index,
-            questionId: qId,
-            colored: false,
-            locked: false,
-            number: index + 1
-        }));
-
-        coloredCount = 0;
-        gameComplete = false;
-        currentCellIndex = null;
-        currentQuestion = null;
-        isAnswering = false;
-        updateStats();
-    }
-
-    // ---------- RENDER ----------
-
-    function renderGrid() {
-        gridContainer.innerHTML = '';
-        gridData.forEach((cell, index) => {
-            const div = document.createElement('div');
-            div.className = 'cell';
-            const q = getQuestionById(cell.questionId);
-            if (cell.colored) {
-                div.classList.add('colored');
-                div.style.background = COLOR_MAP[cell.questionId] || '#b08d6a';
-                div.innerHTML = `
-                    <span>${q ? q.emoji : '⭐'}</span>
-                    <span class="label">${q ? q.word : ''}</span>
-                `;
-            } else {
-                div.style.background = '#f5ede4';
-                div.innerHTML = `
-                    <span>${q ? q.emoji : '❓'}</span>
-                    <span class="label">${q ? q.word : '???'}</span>
-                    <span class="speaker-icon">🔈</span>
-                `;
-            }
-            if (cell.locked) {
-                div.classList.add('locked');
-            }
-            div.dataset.index = index;
-            div.addEventListener('click', () => onCellClick(index));
-            
-            // Click on speaker icon to hear word
-            const speaker = div.querySelector('.speaker-icon');
-            if (speaker) {
-                speaker.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const qData = getQuestionById(cell.questionId);
-                    if (qData && !cell.colored) {
-                        speakWord(qData.word);
-                        div.classList.add('speaking');
-                        setTimeout(() => div.classList.remove('speaking'), 1500);
-                        setFeedback(`👂 Listening: "${qData.word}"`, 'info');
-                    }
-                });
-            }
-            
-            gridContainer.appendChild(div);
-        });
-    }
-
-    function renderLegend() {
-        const categories = ['easy', 'average', 'difficult'];
-        const labels = ['Easy 🟢', 'Average 🟡', 'Difficult 🔴'];
-        legendContainer.innerHTML = '';
-        categories.forEach((cat, idx) => {
-            const item = document.createElement('span');
-            item.className = 'legend-item';
-            const qs = QUESTION_BANK.filter(q => q.category === cat);
-            const color = cat === 'easy' ? '#6bbf8a' : (cat === 'average' ? '#f4c542' : '#e63946');
-            item.innerHTML = `
-                <span class="legend-color" style="background:${color};"></span>
-                ${labels[idx]} (${qs.length})
-            `;
-            legendContainer.appendChild(item);
-        });
-    }
-
-    function highlightCell(index) {
-        const cells = gridContainer.children;
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].style.boxShadow = '';
-            cells[i].style.transform = '';
-        }
-        if (index !== null && index >= 0 && index < cells.length) {
-            cells[index].style.boxShadow = '0 0 30px #ffd700, 0 6px 0 #4a2c1b';
-            cells[index].style.transform = 'scale(1.05)';
-        }
-    }
-
-    // ---------- RENDER OPTIONS ----------
-
-    function renderOptions(question) {
-        optionsContainer.innerHTML = '';
-        const letters = ['A', 'B', 'C'];
-        const shuffledOptions = shuffleArray([...question.options]);
-        
-        shuffledOptions.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerHTML = `
-                <span class="letter">${letters[idx]}</span>
-                <span>${opt}</span>
-            `;
-            btn.dataset.value = opt;
-            btn.addEventListener('click', () => onOptionClick(btn, question, opt));
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    // ---------- CELL CLICK ----------
-
-    function onCellClick(index) {
-        const cell = gridData[index];
-        if (cell.colored) {
-            setFeedback('✅ This is already completed! Pick another.', 'info');
-            return;
-        }
-        if (cell.locked) {
-            setFeedback('⏳ Please answer the current question first.', 'info');
+    function switchTeam() {
+        if (isAnswering) {
+            setFeedback('⏳ Please finish the current question first!', 'info');
             return;
         }
         if (gameComplete) {
-            setFeedback('🎉 You completed everything! Press "New Game" to play again.', 'info');
+            setFeedback('🎉 Game is over! Press "New Game" to play again.', 'info');
             return;
         }
-        if (isAnswering) {
-            setFeedback('⏳ Please finish the current question.', 'info');
-            return;
-        }
-
-        currentCellIndex = index;
-        currentQuestion = getQuestionById(cell.questionId);
-        cell.locked = true;
-        isAnswering = true;
-        renderGrid();
-
-        const q = currentQuestion;
-        const diffLabel = q.category === 'easy' ? 'Easy 🟢' : (q.category === 'average' ? 'Average 🟡' : 'Difficult 🔴');
-        const diffClass = q.category === 'easy' ? 'diff-easy' : (q.category === 'average' ? 'diff-average' : 'diff-difficult');
-
-        cellNumberDisplay.textContent = `🎯 ${q.emoji} ${q.word}`;
-        difficultyBadge.textContent = diffLabel;
-       
+        currentTeam = currentTeam === 'boys' ? 'girls' : 'boys';
+        updateTurn();
+        setFeedback(`
