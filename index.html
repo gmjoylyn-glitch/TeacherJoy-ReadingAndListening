@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>👦👧 Boys vs Girls - Spelling Challenge</title>
+    <title>👦👧 Jobs & Professions - Spelling Challenge</title>
     <style>
         /* ===== MAIN STYLING ===== */
         * {
@@ -781,7 +781,7 @@
 
     <div class="banner">
         👦 Boys vs Girls 👧
-        <span>🎤 AI Voice Says It!</span>
+        <span>💼 Jobs & Professions</span>
         <button class="music-toggle" id="musicToggle">🔊 Music On</button>
     </div>
 
@@ -857,129 +857,145 @@
 
 <script>
     // ============================================================
-    //  BOYS VS GIRLS - SPELLING CHALLENGE with AI VOICE
+    //  JOBS & PROFESSIONS - SPELLING CHALLENGE
     //  Grade 4 - Listen, Choose the Correct Spelling
-    //  WITH REAL PICTURES!
+    //  WITH PICTURES FROM DEEPSEEK GENERATED URLs
     // ============================================================
 
-    // ---------- QUESTION BANK with PICTURE URLs ----------
+    // ---------- QUESTION BANK - JOBS & PROFESSIONS ----------
     const QUESTION_BANK = [
-        // ---- EASY (Emotions & Simple Jobs) ----
+        // ---- EASY (8 Jobs) ----
         { 
             id: 'e1', category: 'easy', 
-            word: 'happy', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/smiley-2705672_640.png',
-            options: ['happy', 'hapy', 'happi'],
-            hint: 'Feeling joyful'
+            word: 'doctor',
+            emoji: '👨‍⚕️',
+            image: 'https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg',
+            options: ['doctor', 'docter', 'doktor'],
+            hint: 'Helps sick people get better'
         },
         { 
             id: 'e2', category: 'easy', 
-            word: 'sad', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/sad-2705673_640.png',
-            options: ['sad', 'sadd', 'sade'],
-            hint: 'Feeling unhappy'
+            word: 'teacher',
+            emoji: '👩‍🏫',
+            image: 'https://img.freepik.com/free-vector/teacher-character-background_1270-87.jpg',
+            options: ['teacher', 'techer', 'teecher'],
+            hint: 'Teaches students in a classroom'
         },
         { 
             id: 'e3', category: 'easy', 
-            word: 'angry', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/angry-2705671_640.png',
-            options: ['angry', 'angrey', 'angri'],
-            hint: 'Feeling very mad'
+            word: 'pilot',
+            emoji: '👨‍✈️',
+            image: 'https://img.freepik.com/free-vector/pilot-character-background_1270-86.jpg',
+            options: ['pilot', 'pilet', 'pilott'],
+            hint: 'Flies airplanes in the sky'
         },
         { 
             id: 'e4', category: 'easy', 
-            word: 'scared', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/scared-2705670_640.png',
-            options: ['scared', 'scaird', 'scared'],
-            hint: 'Feeling afraid'
+            word: 'cook',
+            emoji: '👨‍🍳',
+            image: 'https://img.freepik.com/free-vector/chef-character-background_1270-83.jpg',
+            options: ['cook', 'coke', 'cokk'],
+            hint: 'Makes delicious food in a kitchen'
         },
         { 
             id: 'e5', category: 'easy', 
-            word: 'doctor', 
-            image: 'https://cdn.pixabay.com/photo/2020/07/15/16/30/doctor-5407611_640.png',
-            options: ['doctor', 'docter', 'doktor'],
-            hint: 'Helps sick people'
+            word: 'police',
+            emoji: '👮‍♂️',
+            image: 'https://img.freepik.com/free-vector/police-officer-character-background_1270-85.jpg',
+            options: ['police', 'polise', 'polece'],
+            hint: 'Keeps people safe and catches bad guys'
         },
         { 
             id: 'e6', category: 'easy', 
-            word: 'teacher', 
-            image: 'https://cdn.pixabay.com/photo/2015/10/31/11/58/teacher-1015360_640.png',
-            options: ['teacher', 'techer', 'teecher'],
-            hint: 'Teaches students'
-        },
-        { 
-            id: 'e7', category: 'easy', 
-            word: 'pilot', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/12/14/12/pilot-147766_640.png',
-            options: ['pilot', 'pilet', 'pilott'],
-            hint: 'Flies airplanes'
-        },
-        { 
-            id: 'e8', category: 'easy', 
-            word: 'cook', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/17/cook-157053_640.png',
-            options: ['cook', 'coke', 'cokk'],
-            hint: 'Makes delicious food'
-        },
-
-        // ---- AVERAGE (Emotions & Jobs) ----
-        { 
-            id: 'a1', category: 'average', 
-            word: 'worried', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/worried-2705674_640.png',
-            options: ['worried', 'woreed', 'worid'],
-            hint: 'Feeling anxious'
-        },
-        { 
-            id: 'a2', category: 'average', 
-            word: 'excited', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/excited-2705675_640.png',
-            options: ['excited', 'excitted', 'exsited'],
-            hint: 'Feeling very happy and eager'
-        },
-        { 
-            id: 'a3', category: 'average', 
-            word: 'police', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/police-157106_640.png',
-            options: ['police', 'polise', 'polece'],
-            hint: 'Keeps people safe'
-        },
-        { 
-            id: 'a4', category: 'average', 
-            word: 'farmer', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/farmer-157102_640.png',
+            word: 'farmer',
+            emoji: '👨‍🌾',
+            image: 'https://img.freepik.com/free-vector/farmer-character-background_1270-82.jpg',
             options: ['farmer', 'farmar', 'farmee'],
             hint: 'Grows crops and raises animals'
         },
+        { 
+            id: 'e7', category: 'easy', 
+            word: 'fireman',
+            emoji: '🧑‍🚒',
+            image: 'https://img.freepik.com/free-vector/firefighter-character-background_1270-81.jpg',
+            options: ['fireman', 'firemen', 'firman'],
+            hint: 'Puts out fires and saves people'
+        },
+        { 
+            id: 'e8', category: 'easy', 
+            word: 'nurse',
+            emoji: '👩‍⚕️',
+            image: 'https://img.freepik.com/free-vector/nurse-character-background_1270-80.jpg',
+            options: ['nurse', 'nerse', 'nurce'],
+            hint: 'Cares for sick people in a hospital'
+        },
 
-        // ---- DIFFICULT (Emotions & Jobs) ----
+        // ---- AVERAGE (4 Jobs) ----
+        { 
+            id: 'a1', category: 'average', 
+            word: 'astronaut',
+            emoji: '🧑‍🚀',
+            image: 'https://img.freepik.com/free-vector/astronaut-character-background_1270-79.jpg',
+            options: ['astronaut', 'astronot', 'astranaut'],
+            hint: 'Travels to space and explores planets'
+        },
+        { 
+            id: 'a2', category: 'average', 
+            word: 'detective',
+            emoji: '🕵️‍♂️',
+            image: 'https://img.freepik.com/free-vector/detective-character-background_1270-78.jpg',
+            options: ['detective', 'detectiv', 'detektive'],
+            hint: 'Solves mysteries and finds clues'
+        },
+        { 
+            id: 'a3', category: 'average', 
+            word: 'dentist',
+            emoji: '🦷',
+            image: 'https://img.freepik.com/free-vector/dentist-character-background_1270-77.jpg',
+            options: ['dentist', 'dentest', 'dentast'],
+            hint: 'Takes care of teeth and smiles'
+        },
+        { 
+            id: 'a4', category: 'average', 
+            word: 'veterinarian',
+            emoji: '🐾',
+            image: 'https://img.freepik.com/free-vector/veterinarian-character-background_1270-76.jpg',
+            options: ['veterinarian', 'veterinarian', 'veteranarian'],
+            hint: 'Doctor for animals and pets'
+        },
+
+        // ---- DIFFICULT (4 Jobs) ----
         { 
             id: 'd1', category: 'difficult', 
-            word: 'peaceful', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/peaceful-2705669_640.png',
-            options: ['peaceful', 'peacefull', 'peacful'],
-            hint: 'Feeling calm and relaxed'
+            word: 'architect',
+            emoji: '🏗️',
+            image: 'https://img.freepik.com/free-vector/architect-character-background_1270-75.jpg',
+            options: ['architect', 'architecht', 'arkitect'],
+            hint: 'Designs buildings and houses'
         },
         { 
             id: 'd2', category: 'difficult', 
-            word: 'furious', 
-            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/furious-2705676_640.png',
-            options: ['furious', 'furius', 'furiouss'],
-            hint: 'Very, very angry'
+            word: 'engineer',
+            emoji: '👷',
+            image: 'https://img.freepik.com/free-vector/engineer-character-background_1270-74.jpg',
+            options: ['engineer', 'engeneer', 'enginear'],
+            hint: 'Builds roads, bridges, and machines'
         },
         { 
             id: 'd3', category: 'difficult', 
-            word: 'astronaut', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/16/astronaut-157049_640.png',
-            options: ['astronaut', 'astronot', 'astranaut'],
-            hint: 'Travels to space'
+            word: 'scientist',
+            emoji: '🔬',
+            image: 'https://img.freepik.com/free-vector/scientist-character-background_1270-73.jpg',
+            options: ['scientist', 'sientist', 'sciantist'],
+            hint: 'Does experiments and discovers new things'
         },
         { 
             id: 'd4', category: 'difficult', 
-            word: 'detective', 
-            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/20/detective-157114_640.png',
-            options: ['detective', 'detectiv', 'detektive'],
-            hint: 'Solves mysteries'
+            word: 'journalist',
+            emoji: '📰',
+            image: 'https://img.freepik.com/free-vector/journalist-character-background_1270-72.jpg',
+            options: ['journalist', 'jornalist', 'journlist'],
+            hint: 'Writes news stories for newspapers'
         }
     ];
 
@@ -1032,7 +1048,6 @@
         utterance.pitch = 1;
         utterance.volume = 1;
 
-        // Try to get a good voice
         const voices = window.speechSynthesis.getVoices();
         const goodVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) || 
                          voices.find(v => v.lang === 'en-US' && v.name.includes('Samantha')) ||
@@ -1175,7 +1190,6 @@
         updateTurn();
         setFeedback(`🔄 Switched to ${currentTeam === 'boys' ? 'Boys' : 'Girls'}' turn!`, 'info');
         
-        // Unlock all cells and reset any locked state
         gridData.forEach(cell => {
             if (!cell.colored) {
                 cell.locked = false;
@@ -1183,7 +1197,6 @@
         });
         renderGrid();
         
-        // Clear any selected question
         currentCellIndex = null;
         currentQuestion = null;
         isAnswering = false;
@@ -1205,6 +1218,7 @@
             questionId: qId,
             colored: false,
             locked: false,
+            team: null,
             number: index + 1
         }));
 
@@ -1248,7 +1262,6 @@
             div.dataset.index = index;
             div.addEventListener('click', () => onCellClick(index));
             
-            // Click on speaker icon to hear word
             const speaker = div.querySelector('.speaker-icon');
             if (speaker) {
                 speaker.addEventListener('click', (e) => {
@@ -1319,31 +1332,26 @@
     function onCellClick(index) {
         const cell = gridData[index];
         
-        // Check if game is complete
         if (gameComplete) {
             setFeedback('🎉 You completed everything! Press "New Game" to play again.', 'info');
             return;
         }
         
-        // Check if cell is already colored
         if (cell.colored) {
             setFeedback('✅ This is already completed! Pick another.', 'info');
             return;
         }
         
-        // Check if cell is locked (being answered)
         if (cell.locked) {
             setFeedback('⏳ Please answer the current question first.', 'info');
             return;
         }
         
-        // Check if answering another question
         if (isAnswering) {
             setFeedback('⏳ Please finish the current question first.', 'info');
             return;
         }
 
-        // Lock the cell
         cell.locked = true;
         currentCellIndex = index;
         currentQuestion = getQuestionById(cell.questionId);
@@ -1354,19 +1362,19 @@
         const diffLabel = q.category === 'easy' ? 'Easy 🟢' : (q.category === 'average' ? 'Average 🟡' : 'Difficult 🔴');
         const diffClass = q.category === 'easy' ? 'diff-easy' : (q.category === 'average' ? 'diff-average' : 'diff-difficult');
 
-        cellNumberDisplay.textContent = `🎯 ${q.word}`;
+        cellNumberDisplay.textContent = `💼 ${q.word}`;
         difficultyBadge.textContent = diffLabel;
         difficultyBadge.className = `difficulty ${diffClass}`;
 
         questionText.innerHTML = `
             <img src="${q.image}" class="question-image" alt="${q.word}" />
-            <span>What is the correct spelling?</span>
+            <span>What is this job called?</span>
             <span class="word-hint">💡 ${q.hint}</span>
             <button class="listen-btn" onclick="speakWord('${q.word}')">🔊 Listen to "${q.word}"</button>
         `;
 
         renderOptions(q);
-        setFeedback(`🔤 Choose the correct spelling for the picture!`, 'info');
+        setFeedback(`🔤 Choose the correct spelling for this job!`, 'info');
         highlightCell(index);
     }
 
@@ -1383,7 +1391,6 @@
         if (isCorrect) {
             btn.classList.add('correct');
             
-            // Color the cell for the current team
             const cell = gridData[currentCellIndex];
             cell.colored = true;
             cell.locked = false;
@@ -1401,7 +1408,6 @@
             setFeedback(`✅ Correct! +${points} points for ${currentTeam === 'boys' ? 'Boys' : 'Girls'}! 🎉`, 
                        currentTeam === 'boys' ? 'team-boy' : 'team-girl');
 
-            // Pop animation
             const cells = gridContainer.children;
             if (cells[currentCellIndex]) {
                 cells[currentCellIndex].classList.add('completed');
@@ -1411,7 +1417,6 @@
             renderGrid();
             highlightCell(null);
 
-            // Reset for next
             currentCellIndex = null;
             currentQuestion = null;
             isAnswering = false;
@@ -1421,21 +1426,18 @@
             questionText.innerHTML = `<span>👆 Tap another picture to continue!</span>`;
             optionsContainer.innerHTML = '';
 
-            // Check completion
             if (coloredCount === TOTAL_CELLS) {
                 gameComplete = true;
                 showWinner();
                 return;
             }
 
-            // Auto-select next cell after delay
             setTimeout(autoSelectNext, 800);
             
         } else {
             btn.classList.add('wrong');
             setFeedback(`❌ "${selectedValue}" is not correct. Try again!`, 'wrong');
 
-            // Show correct answer
             setTimeout(() => {
                 allOptions.forEach(b => {
                     if (b.dataset.value === question.word) {
@@ -1444,7 +1446,6 @@
                 });
                 setFeedback(`💡 The correct spelling is "${question.word}". Click the picture again!`, 'info');
                 
-                // Re-enable the cell after delay
                 setTimeout(() => {
                     const cell = gridData[currentCellIndex];
                     if (cell) {
@@ -1468,7 +1469,6 @@
     function autoSelectNext() {
         if (gameComplete || isAnswering) return;
         
-        // Find the first uncolored cell that is not locked
         const index = gridData.findIndex(cell => !cell.colored && !cell.locked);
         if (index !== -1) {
             onCellClick(index);
@@ -1493,11 +1493,11 @@
         if (finalBoys > finalGirls) {
             winnerEmoji = '👦🏆';
             winnerTitle = '🎉 Boys Win!';
-            winnerMessage = 'Great spelling, boys! You are champions!';
+            winnerMessage = 'Great spelling, boys! You are job experts!';
         } else if (finalGirls > finalBoys) {
             winnerEmoji = '👧🏆';
             winnerTitle = '🎉 Girls Win!';
-            winnerMessage = 'Amazing spelling, girls! You are champions!';
+            winnerMessage = 'Amazing spelling, girls! You are job experts!';
         } else {
             winnerEmoji = '🤝';
             winnerTitle = '🤝 It\'s a Tie!';
@@ -1542,6 +1542,12 @@
     switchTeamBtn.addEventListener('click', switchTeam);
     resetBtn.addEventListener('click', resetGame);
 
+    // Load voices
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+    };
+
     // ---------- START THE GAME ----------
     generateGrid();
     renderGrid();
@@ -1550,7 +1556,7 @@
     updateTurn();
     setFeedback('👦 Boys go first! Click a picture to start!', 'info');
 
-    // Start music after user interaction
+    // Start music
     document.addEventListener('click', function initMusic() {
         if (isMusicOn) {
             initAudio();
@@ -1559,8 +1565,8 @@
         document.removeEventListener('click', initMusic);
     }, { once: true });
 
-    console.log('🎮 Boys vs Girls - Spelling Challenge with Pictures!');
-    console.log('📚 16 words to spell - Emotions & Jobs');
+    console.log('💼 Jobs & Professions - Spelling Challenge!');
+    console.log('📚 16 jobs to learn and spell');
     console.log('👦👧 Boys vs Girls - Who will win?');
 </script>
 </body>
