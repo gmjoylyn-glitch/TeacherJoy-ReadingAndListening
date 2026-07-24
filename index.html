@@ -182,28 +182,40 @@
             cursor: pointer;
             transition: 0.2s;
             box-shadow: 0 6px 0 #4a2c1b;
-            font-size: 2.8rem;
             position: relative;
             user-select: none;
             padding: 4px;
             min-height: 100px;
+            overflow: hidden;
         }
 
-        .cell:active:not(.colored-boy):not(.colored-girl):not(.locked) {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #4a2c1b;
+        .cell .cell-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .cell .cell-emoji {
+            font-size: 3rem;
         }
 
         .cell .label {
             font-size: 0.6rem;
             font-weight: bold;
             color: #3d2b1f;
-            background: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.9);
             padding: 2px 8px;
             border-radius: 20px;
             margin-top: 2px;
             text-align: center;
             max-width: 100%;
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.55rem;
         }
 
         .cell .team-badge {
@@ -219,10 +231,40 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #4a2c1b;
+            z-index: 2;
+        }
+
+        .cell .cell-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            border-radius: 16px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .cell .cell-overlay .lock-icon {
+            font-size: 2.5rem;
+        }
+
+        .cell.locked .cell-overlay {
+            display: flex;
+        }
+
+        .cell:active:not(.colored-boy):not(.colored-girl):not(.locked) {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #4a2c1b;
         }
 
         .cell.colored-boy {
-            background: #b8d4f0;
             border-color: #4a90d9;
             box-shadow: 0 4px 0 #3a70a9;
             transform: translateY(2px);
@@ -231,7 +273,6 @@
         }
 
         .cell.colored-girl {
-            background: #f5c8d8;
             border-color: #ff6b6b;
             box-shadow: 0 4px 0 #c94a4a;
             transform: translateY(2px);
@@ -246,6 +287,7 @@
             top: -8px;
             right: -8px;
             font-size: 1.2rem;
+            z-index: 3;
         }
 
         .cell.completed {
@@ -253,7 +295,7 @@
         }
 
         .cell.locked {
-            opacity: 0.5;
+            opacity: 0.7;
             cursor: not-allowed;
             transform: translateY(2px);
             box-shadow: 0 2px 0 #4a2c1b;
@@ -277,10 +319,12 @@
             cursor: pointer;
             pointer-events: auto;
             z-index: 5;
+            border: 2px solid white;
         }
 
         .cell .speaker-icon:hover {
             background: #4a3222;
+            transform: scale(1.1);
         }
 
         .cell .speaker-icon.disabled-speaker {
@@ -702,8 +746,10 @@
                 grid-template-columns: repeat(4, 1fr);
             }
             .cell {
-                font-size: 2rem;
                 min-height: 80px;
+            }
+            .cell .cell-emoji {
+                font-size: 2rem;
             }
             .question-text {
                 font-size: 1.1rem;
@@ -828,57 +874,65 @@
     // ============================================================
     //  BOYS VS GIRLS - SPELLING CHALLENGE with AI VOICE
     //  Grade 4 - Listen, Choose the Correct Spelling
-    //  FIXED: Cannot press buttons that are locked or completed
+    //  WITH REAL PICTURES!
     // ============================================================
 
-    // ---------- QUESTION BANK ----------
+    // ---------- QUESTION BANK with PICTURE URLs ----------
     const QUESTION_BANK = [
         // ---- EASY (Emotions & Simple Jobs) ----
         { 
             id: 'e1', category: 'easy', 
             word: 'happy', emoji: '😊',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/smiley-2705672_640.png',
             options: ['happy', 'hapy', 'happi'],
             hint: 'Feeling joyful'
         },
         { 
             id: 'e2', category: 'easy', 
             word: 'sad', emoji: '😢',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/sad-2705673_640.png',
             options: ['sad', 'sadd', 'sade'],
             hint: 'Feeling unhappy'
         },
         { 
             id: 'e3', category: 'easy', 
             word: 'angry', emoji: '😡',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/angry-2705671_640.png',
             options: ['angry', 'angrey', 'angri'],
             hint: 'Feeling very mad'
         },
         { 
             id: 'e4', category: 'easy', 
             word: 'scared', emoji: '😨',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/scared-2705670_640.png',
             options: ['scared', 'scaird', 'scared'],
             hint: 'Feeling afraid'
         },
         { 
             id: 'e5', category: 'easy', 
             word: 'doctor', emoji: '👨‍⚕️',
+            image: 'https://cdn.pixabay.com/photo/2020/07/15/16/30/doctor-5407611_640.png',
             options: ['doctor', 'docter', 'doktor'],
             hint: 'Helps sick people'
         },
         { 
             id: 'e6', category: 'easy', 
             word: 'teacher', emoji: '👩‍🏫',
+            image: 'https://cdn.pixabay.com/photo/2015/10/31/11/58/teacher-1015360_640.png',
             options: ['teacher', 'techer', 'teecher'],
             hint: 'Teaches students'
         },
         { 
             id: 'e7', category: 'easy', 
             word: 'pilot', emoji: '👨‍✈️',
+            image: 'https://cdn.pixabay.com/photo/2013/07/12/14/12/pilot-147766_640.png',
             options: ['pilot', 'pilet', 'pilott'],
             hint: 'Flies airplanes'
         },
         { 
             id: 'e8', category: 'easy', 
             word: 'cook', emoji: '👨‍🍳',
+            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/17/cook-157053_640.png',
             options: ['cook', 'coke', 'cokk'],
             hint: 'Makes delicious food'
         },
@@ -887,24 +941,28 @@
         { 
             id: 'a1', category: 'average', 
             word: 'worried', emoji: '😟',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/worried-2705674_640.png',
             options: ['worried', 'woreed', 'worid'],
             hint: 'Feeling anxious'
         },
         { 
             id: 'a2', category: 'average', 
             word: 'excited', emoji: '🤩',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/excited-2705675_640.png',
             options: ['excited', 'excitted', 'exsited'],
             hint: 'Feeling very happy and eager'
         },
         { 
             id: 'a3', category: 'average', 
             word: 'police', emoji: '👮‍♂️',
+            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/police-157106_640.png',
             options: ['police', 'polise', 'polece'],
             hint: 'Keeps people safe'
         },
         { 
             id: 'a4', category: 'average', 
             word: 'farmer', emoji: '👨‍🌾',
+            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/farmer-157102_640.png',
             options: ['farmer', 'farmar', 'farmee'],
             hint: 'Grows crops and raises animals'
         },
@@ -913,24 +971,28 @@
         { 
             id: 'd1', category: 'difficult', 
             word: 'peaceful', emoji: '😌',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/peaceful-2705669_640.png',
             options: ['peaceful', 'peacefull', 'peacful'],
             hint: 'Feeling calm and relaxed'
         },
         { 
             id: 'd2', category: 'difficult', 
             word: 'furious', emoji: '🤬',
+            image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/furious-2705676_640.png',
             options: ['furious', 'furius', 'furiouss'],
             hint: 'Very, very angry'
         },
         { 
             id: 'd3', category: 'difficult', 
             word: 'astronaut', emoji: '🧑‍🚀',
+            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/16/astronaut-157049_640.png',
             options: ['astronaut', 'astronot', 'astranaut'],
             hint: 'Travels to space'
         },
         { 
             id: 'd4', category: 'difficult', 
             word: 'detective', emoji: '🕵️‍♂️',
+            image: 'https://cdn.pixabay.com/photo/2013/07/13/10/20/detective-157114_640.png',
             options: ['detective', 'detectiv', 'detektive'],
             hint: 'Solves mysteries'
         }
@@ -969,6 +1031,7 @@
     const girlsCard = document.getElementById('girlsCard');
     const winnerOverlay = document.getElementById('winnerOverlay');
     const switchTeamBtn = document.getElementById('switchTeamBtn');
+    const resetBtn = document.getElementById('resetBtn');
 
     // ---------- AI VOICE ----------
     function speakWord(word, callback) {
@@ -980,122 +1043,4 @@
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.85;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-
-        const voices = window.speechSynthesis.getVoices();
-        const femaleVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Female')) || 
-                           voices.find(v => v.lang === 'en-US') || 
-                           voices[0];
-        if (femaleVoice) utterance.voice = femaleVoice;
-
-        if (callback) {
-            utterance.onend = callback;
-        }
-
-        window.speechSynthesis.speak(utterance);
-    }
-
-    // ---------- BACKGROUND MUSIC ----------
-    function initAudio() {
-        try {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (e) {}
-    }
-
-    function playMusic() {
-        if (!audioContext) {
-            initAudio();
-            if (!audioContext) return;
-        }
-
-        if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-
-        if (musicInterval) {
-            clearInterval(musicInterval);
-            musicInterval = null;
-        }
-
-        if (!isMusicOn) return;
-
-        let noteIndex = 0;
-        const melody = [523, 587, 659, 523, 587, 659, 523, 587, 659, 784, 659, 587];
-
-        function playNote() {
-            if (!isMusicOn || !audioContext) return;
-
-            try {
-                const osc = audioContext.createOscillator();
-                const gain = audioContext.createGain();
-                osc.connect(gain);
-                gain.connect(audioContext.destination);
-
-                osc.type = 'sine';
-                osc.frequency.value = melody[noteIndex % melody.length];
-                gain.gain.setValueAtTime(0.05, audioContext.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
-
-                osc.start(audioContext.currentTime);
-                osc.stop(audioContext.currentTime + 0.3);
-
-                noteIndex++;
-            } catch (e) {}
-        }
-
-        playNote();
-        musicInterval = setInterval(playNote, 500);
-    }
-
-    function stopMusic() {
-        if (musicInterval) {
-            clearInterval(musicInterval);
-            musicInterval = null;
-        }
-        if (audioContext) {
-            try {
-                audioContext.close();
-            } catch (e) {}
-            audioContext = null;
-        }
-    }
-
-    function toggleMusic() {
-        isMusicOn = !isMusicOn;
-        musicToggle.textContent = isMusicOn ? '🔊 Music On' : '🔇 Music Off';
-        if (isMusicOn) {
-            initAudio();
-            playMusic();
-        } else {
-            stopMusic();
-        }
-    }
-
-    // ---------- HELPERS ----------
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    function getQuestionById(id) {
-        return QUESTION_BANK.find(q => q.id === id);
-    }
-
-    function updateStats() {
-        boysScoreDisplay.textContent = boysScore;
-        girlsScoreDisplay.textContent = girlsScore;
-        const pct = Math.round((coloredCount / TOTAL_CELLS) * 100);
-        progressFill.style.width = `${pct}%`;
-    }
-
-    function updateTurn() {
-        if (currentTeam === 'boys') {
-            turnIndicator.textContent = '👦 Boys\' Turn';
-            turnIndicator.className = 'turn-indicator turn-boy';
-            boysCard.classList.add('active-team
+       
