@@ -144,10 +144,6 @@
             border-width: 5px;
         }
 
-        .team-card.disabled-team {
-            opacity: 0.6;
-        }
-
         .main-area {
             display: flex;
             gap: 20px;
@@ -201,21 +197,19 @@
         }
 
         .cell .label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: bold;
             color: #3d2b1f;
             background: rgba(255,255,255,0.9);
             padding: 2px 8px;
             border-radius: 20px;
-            margin-top: 2px;
             text-align: center;
-            max-width: 100%;
             position: absolute;
             bottom: 4px;
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
-            font-size: 0.55rem;
+            z-index: 2;
         }
 
         .cell .team-badge {
@@ -231,7 +225,7 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #4a2c1b;
-            z-index: 2;
+            z-index: 3;
         }
 
         .cell .cell-overlay {
@@ -287,7 +281,7 @@
             top: -8px;
             right: -8px;
             font-size: 1.2rem;
-            z-index: 3;
+            z-index: 4;
         }
 
         .cell.completed {
@@ -303,19 +297,18 @@
         }
 
         .cell .speaker-icon {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             background: #2d1b0e;
             color: white;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: absolute;
             bottom: 4px;
             right: 4px;
-            font-size: 0.7rem;
             cursor: pointer;
             pointer-events: auto;
             z-index: 5;
@@ -339,10 +332,6 @@
             box-shadow: 0 0 30px #ffd700, 0 6px 0 #4a2c1b;
         }
 
-        .cell.wrong-flash {
-            animation: shake 0.5s ease;
-        }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.08); }
@@ -352,12 +341,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
         }
 
         /* RIGHT: Question Panel */
@@ -412,8 +395,13 @@
             gap: 4px;
         }
 
-        .question-text .emoji-big {
-            font-size: 3.5rem;
+        .question-text .question-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #b08d6a;
+            margin-bottom: 4px;
         }
 
         .question-text .word-hint {
@@ -614,10 +602,7 @@
         }
 
         .btn-green { background: #2a9d8f; border-bottom-color: #1f6d62; }
-        .btn-orange { background: #e76f51; border-bottom-color: #b85a3f; }
-        .btn-purple { background: #6d597a; border-bottom-color: #4a3a54; }
         .btn-blue { background: #4a90d9; border-bottom-color: #3a70a9; }
-        .btn-pink { background: #ff6b6b; border-bottom-color: #c94a4a; }
 
         .footer {
             text-align: center;
@@ -882,56 +867,56 @@
         // ---- EASY (Emotions & Simple Jobs) ----
         { 
             id: 'e1', category: 'easy', 
-            word: 'happy', emoji: '😊',
+            word: 'happy', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/smiley-2705672_640.png',
             options: ['happy', 'hapy', 'happi'],
             hint: 'Feeling joyful'
         },
         { 
             id: 'e2', category: 'easy', 
-            word: 'sad', emoji: '😢',
+            word: 'sad', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/sad-2705673_640.png',
             options: ['sad', 'sadd', 'sade'],
             hint: 'Feeling unhappy'
         },
         { 
             id: 'e3', category: 'easy', 
-            word: 'angry', emoji: '😡',
+            word: 'angry', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/angry-2705671_640.png',
             options: ['angry', 'angrey', 'angri'],
             hint: 'Feeling very mad'
         },
         { 
             id: 'e4', category: 'easy', 
-            word: 'scared', emoji: '😨',
+            word: 'scared', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/scared-2705670_640.png',
             options: ['scared', 'scaird', 'scared'],
             hint: 'Feeling afraid'
         },
         { 
             id: 'e5', category: 'easy', 
-            word: 'doctor', emoji: '👨‍⚕️',
+            word: 'doctor', 
             image: 'https://cdn.pixabay.com/photo/2020/07/15/16/30/doctor-5407611_640.png',
             options: ['doctor', 'docter', 'doktor'],
             hint: 'Helps sick people'
         },
         { 
             id: 'e6', category: 'easy', 
-            word: 'teacher', emoji: '👩‍🏫',
+            word: 'teacher', 
             image: 'https://cdn.pixabay.com/photo/2015/10/31/11/58/teacher-1015360_640.png',
             options: ['teacher', 'techer', 'teecher'],
             hint: 'Teaches students'
         },
         { 
             id: 'e7', category: 'easy', 
-            word: 'pilot', emoji: '👨‍✈️',
+            word: 'pilot', 
             image: 'https://cdn.pixabay.com/photo/2013/07/12/14/12/pilot-147766_640.png',
             options: ['pilot', 'pilet', 'pilott'],
             hint: 'Flies airplanes'
         },
         { 
             id: 'e8', category: 'easy', 
-            word: 'cook', emoji: '👨‍🍳',
+            word: 'cook', 
             image: 'https://cdn.pixabay.com/photo/2013/07/13/10/17/cook-157053_640.png',
             options: ['cook', 'coke', 'cokk'],
             hint: 'Makes delicious food'
@@ -940,28 +925,28 @@
         // ---- AVERAGE (Emotions & Jobs) ----
         { 
             id: 'a1', category: 'average', 
-            word: 'worried', emoji: '😟',
+            word: 'worried', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/worried-2705674_640.png',
             options: ['worried', 'woreed', 'worid'],
             hint: 'Feeling anxious'
         },
         { 
             id: 'a2', category: 'average', 
-            word: 'excited', emoji: '🤩',
+            word: 'excited', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/excited-2705675_640.png',
             options: ['excited', 'excitted', 'exsited'],
             hint: 'Feeling very happy and eager'
         },
         { 
             id: 'a3', category: 'average', 
-            word: 'police', emoji: '👮‍♂️',
+            word: 'police', 
             image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/police-157106_640.png',
             options: ['police', 'polise', 'polece'],
             hint: 'Keeps people safe'
         },
         { 
             id: 'a4', category: 'average', 
-            word: 'farmer', emoji: '👨‍🌾',
+            word: 'farmer', 
             image: 'https://cdn.pixabay.com/photo/2013/07/13/10/18/farmer-157102_640.png',
             options: ['farmer', 'farmar', 'farmee'],
             hint: 'Grows crops and raises animals'
@@ -970,28 +955,28 @@
         // ---- DIFFICULT (Emotions & Jobs) ----
         { 
             id: 'd1', category: 'difficult', 
-            word: 'peaceful', emoji: '😌',
+            word: 'peaceful', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/peaceful-2705669_640.png',
             options: ['peaceful', 'peacefull', 'peacful'],
             hint: 'Feeling calm and relaxed'
         },
         { 
             id: 'd2', category: 'difficult', 
-            word: 'furious', emoji: '🤬',
+            word: 'furious', 
             image: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/furious-2705676_640.png',
             options: ['furious', 'furius', 'furiouss'],
             hint: 'Very, very angry'
         },
         { 
             id: 'd3', category: 'difficult', 
-            word: 'astronaut', emoji: '🧑‍🚀',
+            word: 'astronaut', 
             image: 'https://cdn.pixabay.com/photo/2013/07/13/10/16/astronaut-157049_640.png',
             options: ['astronaut', 'astronot', 'astranaut'],
             hint: 'Travels to space'
         },
         { 
             id: 'd4', category: 'difficult', 
-            word: 'detective', emoji: '🕵️‍♂️',
+            word: 'detective', 
             image: 'https://cdn.pixabay.com/photo/2013/07/13/10/20/detective-157114_640.png',
             options: ['detective', 'detectiv', 'detektive'],
             hint: 'Solves mysteries'
@@ -1012,7 +997,6 @@
     let isMusicOn = true;
     let audioContext = null;
     let musicInterval = null;
-    let isProcessing = false;
 
     // DOM refs
     const gridContainer = document.getElementById('gridContainer');
@@ -1043,4 +1027,541 @@
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(word);
-       
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        // Try to get a good voice
+        const voices = window.speechSynthesis.getVoices();
+        const goodVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) || 
+                         voices.find(v => v.lang === 'en-US' && v.name.includes('Samantha')) ||
+                         voices.find(v => v.lang === 'en-US') || 
+                         voices[0];
+        if (goodVoice) utterance.voice = goodVoice;
+
+        if (callback) {
+            utterance.onend = callback;
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // ---------- BACKGROUND MUSIC ----------
+    function initAudio() {
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {}
+    }
+
+    function playMusic() {
+        if (!audioContext) {
+            initAudio();
+            if (!audioContext) return;
+        }
+
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+
+        if (musicInterval) {
+            clearInterval(musicInterval);
+            musicInterval = null;
+        }
+
+        if (!isMusicOn) return;
+
+        let noteIndex = 0;
+        const melody = [523, 587, 659, 523, 587, 659, 523, 587, 659, 784, 659, 587];
+
+        function playNote() {
+            if (!isMusicOn || !audioContext) return;
+
+            try {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc.type = 'sine';
+                osc.frequency.value = melody[noteIndex % melody.length];
+                gain.gain.setValueAtTime(0.04, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
+
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.3);
+
+                noteIndex++;
+            } catch (e) {}
+        }
+
+        playNote();
+        musicInterval = setInterval(playNote, 500);
+    }
+
+    function stopMusic() {
+        if (musicInterval) {
+            clearInterval(musicInterval);
+            musicInterval = null;
+        }
+        if (audioContext) {
+            try {
+                audioContext.close();
+            } catch (e) {}
+            audioContext = null;
+        }
+    }
+
+    function toggleMusic() {
+        isMusicOn = !isMusicOn;
+        musicToggle.textContent = isMusicOn ? '🔊 Music On' : '🔇 Music Off';
+        if (isMusicOn) {
+            initAudio();
+            playMusic();
+        } else {
+            stopMusic();
+        }
+    }
+
+    // ---------- HELPERS ----------
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function getQuestionById(id) {
+        return QUESTION_BANK.find(q => q.id === id);
+    }
+
+    function updateStats() {
+        boysScoreDisplay.textContent = boysScore;
+        girlsScoreDisplay.textContent = girlsScore;
+        const pct = Math.round((coloredCount / TOTAL_CELLS) * 100);
+        progressFill.style.width = `${pct}%`;
+    }
+
+    function updateTurn() {
+        if (currentTeam === 'boys') {
+            turnIndicator.textContent = '👦 Boys\' Turn';
+            turnIndicator.className = 'turn-indicator turn-boy';
+            boysCard.classList.add('active-team');
+            girlsCard.classList.remove('active-team');
+        } else {
+            turnIndicator.textContent = '👧 Girls\' Turn';
+            turnIndicator.className = 'turn-indicator turn-girl';
+            girlsCard.classList.add('active-team');
+            boysCard.classList.remove('active-team');
+        }
+    }
+
+    function setFeedback(text, type = 'info') {
+        feedbackBox.textContent = text;
+        feedbackBox.className = `feedback ${type}`;
+    }
+
+    function switchTeam() {
+        if (isAnswering) {
+            setFeedback('⏳ Please finish the current question first!', 'info');
+            return;
+        }
+        if (gameComplete) {
+            setFeedback('🎉 Game is over! Press "New Game" to play again.', 'info');
+            return;
+        }
+        currentTeam = currentTeam === 'boys' ? 'girls' : 'boys';
+        updateTurn();
+        setFeedback(`🔄 Switched to ${currentTeam === 'boys' ? 'Boys' : 'Girls'}' turn!`, 'info');
+        
+        // Unlock all cells and reset any locked state
+        gridData.forEach(cell => {
+            if (!cell.colored) {
+                cell.locked = false;
+            }
+        });
+        renderGrid();
+        
+        // Clear any selected question
+        currentCellIndex = null;
+        currentQuestion = null;
+        isAnswering = false;
+        cellNumberDisplay.textContent = '🎯 Click a picture!';
+        difficultyBadge.textContent = '-';
+        difficultyBadge.className = 'difficulty';
+        questionText.innerHTML = `<span>👆 Tap a picture to start!</span>`;
+        optionsContainer.innerHTML = '';
+    }
+
+    // ---------- GENERATE GRID ----------
+    function generateGrid() {
+        let allIds = QUESTION_BANK.map(q => q.id);
+        let shuffled = shuffleArray([...allIds]);
+        shuffled = shuffled.slice(0, TOTAL_CELLS);
+
+        gridData = shuffled.map((qId, index) => ({
+            index: index,
+            questionId: qId,
+            colored: false,
+            locked: false,
+            number: index + 1
+        }));
+
+        coloredCount = 0;
+        gameComplete = false;
+        currentCellIndex = null;
+        currentQuestion = null;
+        isAnswering = false;
+        updateStats();
+    }
+
+    // ---------- RENDER ----------
+    function renderGrid() {
+        gridContainer.innerHTML = '';
+        gridData.forEach((cell, index) => {
+            const div = document.createElement('div');
+            div.className = 'cell';
+            const q = getQuestionById(cell.questionId);
+            
+            if (cell.colored) {
+                div.classList.add(cell.team === 'boys' ? 'colored-boy' : 'colored-girl');
+                div.style.background = cell.team === 'boys' ? '#b8d4f0' : '#f5c8d8';
+                div.innerHTML = `
+                    <img src="${q ? q.image : ''}" class="cell-image" alt="${q ? q.word : ''}" />
+                    <span class="label">${q ? q.word : ''}</span>
+                `;
+            } else {
+                div.style.background = '#f5ede4';
+                div.innerHTML = `
+                    <img src="${q ? q.image : ''}" class="cell-image" alt="${q ? q.word : ''}" />
+                    <span class="label">${q ? q.word : '???'}</span>
+                    <span class="speaker-icon">🔈</span>
+                    <div class="cell-overlay"><span class="lock-icon">🔒</span></div>
+                `;
+            }
+            
+            if (cell.locked) {
+                div.classList.add('locked');
+            }
+            
+            div.dataset.index = index;
+            div.addEventListener('click', () => onCellClick(index));
+            
+            // Click on speaker icon to hear word
+            const speaker = div.querySelector('.speaker-icon');
+            if (speaker) {
+                speaker.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const qData = getQuestionById(cell.questionId);
+                    if (qData && !cell.colored && !cell.locked) {
+                        speakWord(qData.word);
+                        div.classList.add('speaking');
+                        setTimeout(() => div.classList.remove('speaking'), 1500);
+                        setFeedback(`👂 Listening: "${qData.word}"`, 'info');
+                    }
+                });
+            }
+            
+            gridContainer.appendChild(div);
+        });
+    }
+
+    function renderLegend() {
+        const categories = ['easy', 'average', 'difficult'];
+        const labels = ['Easy 🟢', 'Average 🟡', 'Difficult 🔴'];
+        legendContainer.innerHTML = '';
+        categories.forEach((cat, idx) => {
+            const item = document.createElement('span');
+            item.className = 'legend-item';
+            const qs = QUESTION_BANK.filter(q => q.category === cat);
+            const color = cat === 'easy' ? '#6bbf8a' : (cat === 'average' ? '#f4c542' : '#e63946');
+            item.innerHTML = `
+                <span class="legend-color" style="background:${color};"></span>
+                ${labels[idx]} (${qs.length})
+            `;
+            legendContainer.appendChild(item);
+        });
+    }
+
+    function highlightCell(index) {
+        const cells = gridContainer.children;
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.boxShadow = '';
+            cells[i].style.transform = '';
+        }
+        if (index !== null && index >= 0 && index < cells.length) {
+            cells[index].style.boxShadow = '0 0 30px #ffd700, 0 6px 0 #4a2c1b';
+            cells[index].style.transform = 'scale(1.05)';
+        }
+    }
+
+    // ---------- RENDER OPTIONS ----------
+    function renderOptions(question) {
+        optionsContainer.innerHTML = '';
+        const letters = ['A', 'B', 'C'];
+        const shuffledOptions = shuffleArray([...question.options]);
+        
+        shuffledOptions.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `
+                <span class="letter">${letters[idx]}</span>
+                <span>${opt}</span>
+            `;
+            btn.dataset.value = opt;
+            btn.addEventListener('click', () => onOptionClick(btn, question, opt));
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // ---------- CELL CLICK ----------
+    function onCellClick(index) {
+        const cell = gridData[index];
+        
+        // Check if game is complete
+        if (gameComplete) {
+            setFeedback('🎉 You completed everything! Press "New Game" to play again.', 'info');
+            return;
+        }
+        
+        // Check if cell is already colored
+        if (cell.colored) {
+            setFeedback('✅ This is already completed! Pick another.', 'info');
+            return;
+        }
+        
+        // Check if cell is locked (being answered)
+        if (cell.locked) {
+            setFeedback('⏳ Please answer the current question first.', 'info');
+            return;
+        }
+        
+        // Check if answering another question
+        if (isAnswering) {
+            setFeedback('⏳ Please finish the current question first.', 'info');
+            return;
+        }
+
+        // Lock the cell
+        cell.locked = true;
+        currentCellIndex = index;
+        currentQuestion = getQuestionById(cell.questionId);
+        isAnswering = true;
+        renderGrid();
+
+        const q = currentQuestion;
+        const diffLabel = q.category === 'easy' ? 'Easy 🟢' : (q.category === 'average' ? 'Average 🟡' : 'Difficult 🔴');
+        const diffClass = q.category === 'easy' ? 'diff-easy' : (q.category === 'average' ? 'diff-average' : 'diff-difficult');
+
+        cellNumberDisplay.textContent = `🎯 ${q.word}`;
+        difficultyBadge.textContent = diffLabel;
+        difficultyBadge.className = `difficulty ${diffClass}`;
+
+        questionText.innerHTML = `
+            <img src="${q.image}" class="question-image" alt="${q.word}" />
+            <span>What is the correct spelling?</span>
+            <span class="word-hint">💡 ${q.hint}</span>
+            <button class="listen-btn" onclick="speakWord('${q.word}')">🔊 Listen to "${q.word}"</button>
+        `;
+
+        renderOptions(q);
+        setFeedback(`🔤 Choose the correct spelling for the picture!`, 'info');
+        highlightCell(index);
+    }
+
+    // ---------- OPTION CLICK ----------
+    function onOptionClick(btn, question, selectedValue) {
+        if (isAnswering === false) return;
+        if (btn.disabled) return;
+
+        const allOptions = optionsContainer.querySelectorAll('.option-btn');
+        allOptions.forEach(b => b.disabled = true);
+
+        const isCorrect = selectedValue === question.word;
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            
+            // Color the cell for the current team
+            const cell = gridData[currentCellIndex];
+            cell.colored = true;
+            cell.locked = false;
+            cell.team = currentTeam;
+            coloredCount++;
+            
+            const points = question.category === 'easy' ? 10 : (question.category === 'average' ? 20 : 30);
+            if (currentTeam === 'boys') {
+                boysScore += points;
+            } else {
+                girlsScore += points;
+            }
+            updateStats();
+
+            setFeedback(`✅ Correct! +${points} points for ${currentTeam === 'boys' ? 'Boys' : 'Girls'}! 🎉`, 
+                       currentTeam === 'boys' ? 'team-boy' : 'team-girl');
+
+            // Pop animation
+            const cells = gridContainer.children;
+            if (cells[currentCellIndex]) {
+                cells[currentCellIndex].classList.add('completed');
+                setTimeout(() => cells[currentCellIndex].classList.remove('completed'), 500);
+            }
+
+            renderGrid();
+            highlightCell(null);
+
+            // Reset for next
+            currentCellIndex = null;
+            currentQuestion = null;
+            isAnswering = false;
+            cellNumberDisplay.textContent = '🎯 Click a picture!';
+            difficultyBadge.textContent = '-';
+            difficultyBadge.className = 'difficulty';
+            questionText.innerHTML = `<span>👆 Tap another picture to continue!</span>`;
+            optionsContainer.innerHTML = '';
+
+            // Check completion
+            if (coloredCount === TOTAL_CELLS) {
+                gameComplete = true;
+                showWinner();
+                return;
+            }
+
+            // Auto-select next cell after delay
+            setTimeout(autoSelectNext, 800);
+            
+        } else {
+            btn.classList.add('wrong');
+            setFeedback(`❌ "${selectedValue}" is not correct. Try again!`, 'wrong');
+
+            // Show correct answer
+            setTimeout(() => {
+                allOptions.forEach(b => {
+                    if (b.dataset.value === question.word) {
+                        b.classList.add('reveal-correct');
+                    }
+                });
+                setFeedback(`💡 The correct spelling is "${question.word}". Click the picture again!`, 'info');
+                
+                // Re-enable the cell after delay
+                setTimeout(() => {
+                    const cell = gridData[currentCellIndex];
+                    if (cell) {
+                        cell.locked = false;
+                        isAnswering = false;
+                        renderGrid();
+                        optionsContainer.innerHTML = '';
+                        questionText.innerHTML = `<span>👆 Tap the picture again to try again!</span>`;
+                        setFeedback(`📝 Click the picture to try again.`, 'info');
+                        highlightCell(null);
+                        cellNumberDisplay.textContent = '🎯 Click a picture!';
+                        difficultyBadge.textContent = '-';
+                        difficultyBadge.className = 'difficulty';
+                    }
+                }, 1500);
+            }, 1000);
+        }
+    }
+
+    // ---------- AUTO-SELECT NEXT ----------
+    function autoSelectNext() {
+        if (gameComplete || isAnswering) return;
+        
+        // Find the first uncolored cell that is not locked
+        const index = gridData.findIndex(cell => !cell.colored && !cell.locked);
+        if (index !== -1) {
+            onCellClick(index);
+        } else {
+            const allColored = gridData.every(cell => cell.colored);
+            if (allColored && !gameComplete) {
+                gameComplete = true;
+                showWinner();
+            }
+        }
+    }
+
+    // ---------- SHOW WINNER ----------
+    function showWinner() {
+        const finalBoys = boysScore;
+        const finalGirls = girlsScore;
+        
+        document.getElementById('finalBoyScore').textContent = finalBoys;
+        document.getElementById('finalGirlScore').textContent = finalGirls;
+        
+        let winnerEmoji, winnerTitle, winnerMessage;
+        if (finalBoys > finalGirls) {
+            winnerEmoji = '👦🏆';
+            winnerTitle = '🎉 Boys Win!';
+            winnerMessage = 'Great spelling, boys! You are champions!';
+        } else if (finalGirls > finalBoys) {
+            winnerEmoji = '👧🏆';
+            winnerTitle = '🎉 Girls Win!';
+            winnerMessage = 'Amazing spelling, girls! You are champions!';
+        } else {
+            winnerEmoji = '🤝';
+            winnerTitle = '🤝 It\'s a Tie!';
+            winnerMessage = 'Both teams are spelling champions! Great job everyone!';
+        }
+        
+        document.getElementById('winnerEmoji').textContent = winnerEmoji;
+        document.getElementById('winnerTitle').textContent = winnerTitle;
+        document.getElementById('winnerMessage').textContent = winnerMessage;
+        winnerOverlay.classList.add('show');
+    }
+
+    // ---------- RESET GAME ----------
+    function resetGame() {
+        winnerOverlay.classList.remove('show');
+        
+        boysScore = 0;
+        girlsScore = 0;
+        coloredCount = 0;
+        gameComplete = false;
+        isAnswering = false;
+        currentTeam = 'boys';
+        currentCellIndex = null;
+        currentQuestion = null;
+        
+        generateGrid();
+        renderGrid();
+        renderLegend();
+        updateStats();
+        updateTurn();
+        
+        cellNumberDisplay.textContent = '🎯 Click a picture!';
+        difficultyBadge.textContent = '-';
+        difficultyBadge.className = 'difficulty';
+        questionText.innerHTML = `<span>👆 Tap a picture to start!</span>`;
+        optionsContainer.innerHTML = '';
+        setFeedback('🔄 New game started! Boys go first!', 'info');
+    }
+
+    // ---------- EVENT LISTENERS ----------
+    musicToggle.addEventListener('click', toggleMusic);
+    switchTeamBtn.addEventListener('click', switchTeam);
+    resetBtn.addEventListener('click', resetGame);
+
+    // ---------- START THE GAME ----------
+    generateGrid();
+    renderGrid();
+    renderLegend();
+    updateStats();
+    updateTurn();
+    setFeedback('👦 Boys go first! Click a picture to start!', 'info');
+
+    // Start music after user interaction
+    document.addEventListener('click', function initMusic() {
+        if (isMusicOn) {
+            initAudio();
+            playMusic();
+        }
+        document.removeEventListener('click', initMusic);
+    }, { once: true });
+
+    console.log('🎮 Boys vs Girls - Spelling Challenge with Pictures!');
+    console.log('📚 16 words to spell - Emotions & Jobs');
+    console.log('👦👧 Boys vs Girls - Who will win?');
+</script>
+</body>
+</html>
