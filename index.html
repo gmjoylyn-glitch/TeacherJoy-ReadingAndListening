@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎨 Color & Feelings Adventure</title>
+    <title>🎯 Emotions & Jobs - Spelling with AI Voice</title>
     <style>
-        /* ===== STYLING ===== */
+        /* ===== MAIN STYLING ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -25,15 +25,13 @@
         .game-wrapper {
             background: #fef9f0;
             border-radius: 60px 60px 30px 30px;
-            padding: 30px 25px 40px;
-            max-width: 700px;
+            padding: 25px 25px 35px;
+            max-width: 1000px;
             width: 100%;
             box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
             border: 6px solid #e8c99b;
-            position: relative;
         }
 
-        /* Top banner */
         .banner {
             background: #ffd966;
             padding: 10px 18px;
@@ -42,7 +40,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: #2d1b0e;
-            margin-top: -50px;
+            margin-top: -45px;
             margin-bottom: 15px;
             border: 4px solid #b8860b;
             box-shadow: 0 6px 0 #b8860b;
@@ -56,24 +54,36 @@
             margin: 0 5px;
         }
 
+        .banner .music-toggle {
+            background: #2d1b0e;
+            color: #ffd966;
+            border: none;
+            padding: 2px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-left: 8px;
+        }
+
         h1 {
             text-align: center;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             color: #3d2b1f;
             text-shadow: 4px 4px 0 #f4c542;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .sub {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #6b4f3a;
             background: #f5ede4;
             padding: 6px 16px;
             border-radius: 40px;
             display: inline-block;
-            margin: 0 auto 15px;
+            margin: 0 auto 12px;
             border: 2px dashed #b08d6a;
         }
 
@@ -81,7 +91,6 @@
             text-align: center;
         }
 
-        /* Score & Level */
         .stats {
             display: flex;
             justify-content: space-between;
@@ -89,53 +98,59 @@
             padding: 12px 22px;
             border-radius: 60px;
             color: #f1faee;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin: 10px 0 18px;
+            margin: 8px 0 15px;
             border: 3px solid #e9c46a;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .stats span {
             background: #4a3222;
-            padding: 2px 18px;
+            padding: 2px 16px;
             border-radius: 40px;
         }
 
-        /* The coloring canvas (grid) */
-        .canvas-container {
+        .main-area {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* LEFT: Picture Grid */
+        .picture-container {
+            flex: 1.2;
+            min-width: 280px;
             background: #d9c9b0;
-            padding: 20px 15px;
+            padding: 18px 15px;
             border-radius: 40px;
             border: 5px solid #7f5539;
-            margin-bottom: 18px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            justify-content: center;
-            margin: 0 auto;
+            aspect-ratio: 4 / 4;
         }
 
         .cell {
             aspect-ratio: 1 / 1;
             border-radius: 20px;
             border: 4px solid #4a2c1b;
-            background: #e8ddd0;
+            background: #f5ede4;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
             box-shadow: 0 6px 0 #4a2c1b;
-            color: #3d2b1f;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
-            min-height: 70px;
+            font-size: 2.8rem;
+            position: relative;
+            user-select: none;
+            padding: 4px;
         }
 
         .cell:active {
@@ -143,14 +158,75 @@
             box-shadow: 0 2px 0 #4a2c1b;
         }
 
+        .cell .label {
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #3d2b1f;
+            background: rgba(255,255,255,0.8);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 2px;
+            text-align: center;
+            max-width: 100%;
+        }
+
         .cell.colored {
-            border-color: #1f3a2b;
-            box-shadow: 0 4px 0 #1f3a2b;
+            background: #b8e6c8;
+            border-color: #2a9d8f;
+            box-shadow: 0 4px 0 #1f6d62;
             transform: translateY(2px);
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .cell.colored .label {
+            background: rgba(42, 157, 143, 0.3);
+        }
+
+        .cell.colored::after {
+            content: '✅';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 1.2rem;
         }
 
         .cell.completed {
             animation: pop 0.4s ease;
+        }
+
+        .cell.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #4a2c1b;
+        }
+
+        .cell .speaker-icon {
+            font-size: 0.9rem;
+            background: #2d1b0e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            font-size: 0.7rem;
+        }
+
+        .cell.speaking {
+            animation: pulse 0.5s ease 3;
+            border-color: #ffd700;
+            box-shadow: 0 0 30px #ffd700, 0 6px 0 #4a2c1b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
         @keyframes pop {
@@ -159,94 +235,227 @@
             100% { transform: scale(1); }
         }
 
-        /* Color palette (emotions) */
-        .palette {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin: 15px 0 10px;
-        }
-
-        .color-btn {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            border: 5px solid #4a2c1b;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 1.1rem;
-            font-weight: bold;
+        /* RIGHT: Question Panel */
+        .question-panel {
+            flex: 1;
+            min-width: 260px;
+            background: #f5ede4;
+            border-radius: 40px;
+            padding: 20px 18px;
+            border: 5px solid #b08d6a;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 0 #4a2c1b;
-            color: #1a1a1a;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
-            line-height: 1.2;
-            padding: 4px;
+            justify-content: space-between;
         }
 
-        .color-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 3px 0 #4a2c1b;
-        }
-
-        .color-btn.active {
-            border: 5px solid #ffd700;
-            box-shadow: 0 0 25px #ffd700, 0 8px 0 #4a2c1b;
-            transform: scale(1.05);
-        }
-
-        .color-btn .emoji {
-            font-size: 1.8rem;
-        }
-        .color-btn .label {
-            font-size: 0.7rem;
-            background: rgba(0,0,0,0.2);
-            padding: 1px 8px;
-            border-radius: 20px;
-        }
-
-        /* Message area */
-        .message-box {
-            background: #eddcd2;
-            padding: 14px 18px;
-            border-radius: 40px;
+        .question-header {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
+            color: #5c4033;
+            background: #eddcd2;
+            padding: 6px 12px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+        }
+
+        .question-header .difficulty {
+            display: inline-block;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .diff-easy { background: #6bbf8a; color: #1a3a2a; }
+        .diff-average { background: #f4c542; color: #3d2b1f; }
+        .diff-difficult { background: #e63946; color: white; }
+
+        .question-text {
+            font-size: 1.3rem;
             font-weight: bold;
             color: #1d3557;
-            border: 3px solid #b08d6a;
-            min-height: 65px;
+            text-align: center;
+            padding: 12px 5px;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 12px 0 15px;
+            background: #fff9f0;
+            border-radius: 30px;
+            border: 3px dashed #b08d6a;
+            margin-bottom: 12px;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        /* Buttons */
+        .question-text .emoji-big {
+            font-size: 3.5rem;
+        }
+
+        .question-text .word-hint {
+            font-size: 0.9rem;
+            color: #5c4033;
+            background: #eddcd2;
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+
+        .question-text .listen-btn {
+            background: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 4px;
+            border-bottom: 4px solid #1f6d62;
+            transition: 0.1s;
+        }
+
+        .question-text .listen-btn:active {
+            transform: translateY(3px);
+            border-bottom-width: 1px;
+        }
+
+        /* Multiple Choice Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .option-btn {
+            padding: 14px 20px;
+            border-radius: 30px;
+            border: 4px solid #b08d6a;
+            background: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            background: #f5ede4;
+        }
+
+        .option-btn:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .option-btn .letter {
+            background: #2d1b0e;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .option-btn.correct {
+            background: #b8e6c8;
+            border-color: #2a9d8f;
+            color: #1a4a3a;
+        }
+
+        .option-btn.wrong {
+            background: #f8d0d0;
+            border-color: #e63946;
+            color: #7a1a1a;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .option-btn.reveal-correct {
+            background: #b8e6c8;
+            border-color: #2a9d8f;
+        }
+
+        .feedback {
+            padding: 12px 16px;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eddcd2;
+            border: 3px solid #b08d6a;
+            margin-bottom: 10px;
+        }
+
+        .feedback.correct {
+            background: #b8e6c8;
+            border-color: #2a9d8f;
+            color: #1a4a3a;
+        }
+
+        .feedback.wrong {
+            background: #f8d0d0;
+            border-color: #e63946;
+            color: #7a1a1a;
+        }
+
+        .feedback.info {
+            background: #d4e6f5;
+            border-color: #457b9d;
+            color: #1a3a5a;
+        }
+
+        .progress-bar {
+            background: #d9c9b0;
+            border-radius: 30px;
+            height: 18px;
+            overflow: hidden;
+            border: 3px solid #7f5539;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2a9d8f, #6bbf8a);
+            border-radius: 30px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
         .controls {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 8px;
         }
 
         .btn {
             background: #2d1b0e;
             color: #f1faee;
             border: none;
-            padding: 14px 30px;
+            padding: 12px 24px;
             border-radius: 60px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             border-bottom: 6px solid #7f5539;
             transition: 0.1s;
             font-family: inherit;
-            letter-spacing: 0.5px;
         }
 
         .btn:active {
@@ -254,24 +463,13 @@
             border-bottom-width: 2px;
         }
 
-        .btn-green {
-            background: #2a9d8f;
-            border-bottom-color: #1f6d62;
-        }
-
-        .btn-orange {
-            background: #e76f51;
-            border-bottom-color: #b85a3f;
-        }
-
-        .btn-purple {
-            background: #6d597a;
-            border-bottom-color: #4a3a54;
-        }
+        .btn-green { background: #2a9d8f; border-bottom-color: #1f6d62; }
+        .btn-orange { background: #e76f51; border-bottom-color: #b85a3f; }
+        .btn-purple { background: #6d597a; border-bottom-color: #4a3a54; }
 
         .footer {
             text-align: center;
-            margin-top: 18px;
+            margin-top: 15px;
             font-size: 0.85rem;
             color: #5c4033;
             background: #f5ede4;
@@ -279,10 +477,49 @@
             border-radius: 30px;
         }
 
-        .footer a {
-            color: #2a6b41;
-            font-weight: bold;
-            text-decoration: none;
+        .legend {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #eddcd2;
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .legend-color {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #4a2c1b;
+        }
+
+        @media (max-width: 700px) {
+            .main-area {
+                flex-direction: column;
+            }
+            .grid {
+                aspect-ratio: 4 / 4;
+            }
+            .cell {
+                font-size: 2rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+                min-height: 60px;
+            }
+            .option-btn {
+                font-size: 1rem;
+                padding: 10px 16px;
+            }
         }
     </style>
 </head>
@@ -290,90 +527,346 @@
 
 <div class="game-wrapper">
 
-    <!-- Banner -->
     <div class="banner">
-        🧠 Don't use textbooks, <span>turn learning into game!</span> 🎮
+        🎤 AI Voice Says It! <span>You Spell It!</span> 🎮
+        <button class="music-toggle" id="musicToggle">🔊 Music On</button>
     </div>
 
-    <h1>🎨 Color & Feelings</h1>
+    <h1>🎯 Emotions & Jobs</h1>
     <div class="sub-wrap">
-        <div class="sub">🌈 Match the feeling to the color!</div>
+        <div class="sub">👂 Listen to the AI voice, then pick the correct spelling!</div>
     </div>
 
-    <!-- Stats -->
     <div class="stats">
         <div>⭐ Score: <span id="scoreDisplay">0</span></div>
-        <div>🎯 Level: <span id="levelDisplay">1</span></div>
-        <div>✅ Colored: <span id="coloredDisplay">0/12</span></div>
+        <div>✅ Completed: <span id="coloredDisplay">0/16</span></div>
+        <div>📊 Progress: <span id="progressPercent">0%</span></div>
     </div>
 
-    <!-- The Coloring Grid -->
-    <div class="canvas-container">
-        <div class="grid" id="gridContainer">
-            <!-- 12 cells will be generated by JavaScript -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="main-area">
+
+        <!-- LEFT: Picture Grid -->
+        <div class="picture-container">
+            <div class="grid" id="gridContainer"></div>
+            <div class="legend" id="legendContainer"></div>
+        </div>
+
+        <!-- RIGHT: Question Panel -->
+        <div class="question-panel">
+            <div>
+                <div class="question-header">
+                    <span id="cellNumberDisplay">🎯 Click a picture!</span>
+                    <span class="difficulty" id="difficultyBadge">-</span>
+                </div>
+
+                <div class="question-text" id="questionText">
+                    <span>👆 Tap a picture to start!</span>
+                </div>
+
+                <div class="options" id="optionsContainer">
+                    <!-- Options will be generated -->
+                </div>
+
+                <div class="feedback info" id="feedbackBox">
+                    💡 Click the speaker 🔈 to hear the word again!
+                </div>
+            </div>
+
+            <div>
+                <div style="font-size:0.85rem; text-align:center; color:#5c4033; margin-bottom:6px;">
+                    🟢 Easy · 🟡 Average · 🔴 Difficult
+                </div>
+                <div class="controls">
+                    <button class="btn btn-green" id="resetBtn">🔄 New Game</button>
+                    <button class="btn btn-orange" id="skipBtn">⏭️ Skip</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Color Palette (Emotions) -->
-    <div class="palette" id="paletteContainer">
-        <!-- Buttons will be generated by JavaScript -->
-    </div>
-
-    <!-- Message -->
-    <div class="message-box" id="messageBox">
-        🖌️ Pick a feeling, then tap a blank square!
-    </div>
-
-    <!-- Controls -->
-    <div class="controls">
-        <button class="btn btn-green" id="newGameBtn">🔄 New Game</button>
-        <button class="btn btn-purple" id="hintBtn">💡 Hint</button>
-    </div>
-
     <div class="footer">
-        🌟 Feelings: <strong>Happy</strong> · <strong>Sad</strong> · <strong>Angry</strong> · <strong>Calm</strong>
-        &nbsp;|&nbsp; Made for Grade 4 🧒
+        🌟 Listen 👂 → Choose the correct spelling ✏️ → Win! &nbsp;|&nbsp; Grade 4 🧒
     </div>
 </div>
 
 <script>
     // ============================================================
-    //  GAME LOGIC  -  Color & Feelings Adventure
-    //  For Grade 4 Students
+    //  EMOTIONS & JOBS - SPELLING QUIZ with AI VOICE
+    //  Grade 4 - Listen, Choose the Correct Spelling
     // ============================================================
 
-    // ---------- DATA ----------
-    // Each feeling has a color, an emoji, and a label.
-    const FEELINGS = [
-        { id: 'happy',   color: '#f4c542', emoji: '😊', label: 'Happy' },
-        { id: 'sad',     color: '#4a8db7', emoji: '😢', label: 'Sad' },
-        { id: 'angry',   color: '#e63946', emoji: '😡', label: 'Angry' },
-        { id: 'calm',    color: '#6bbf8a', emoji: '😌', label: 'Calm' }
+    // ---------- QUESTION BANK ----------
+    // 16 Questions: Emotions & Jobs with emojis
+    // Easy: 8, Average: 4, Difficult: 4
+
+    const QUESTION_BANK = [
+        // ---- EASY (Emotions & Simple Jobs) ----
+        { 
+            id: 'e1', category: 'easy', 
+            word: 'happy', emoji: '😊',
+            options: ['happy', 'hapy', 'happi'],
+            hint: 'Feeling joyful'
+        },
+        { 
+            id: 'e2', category: 'easy', 
+            word: 'sad', emoji: '😢',
+            options: ['sad', 'sadd', 'sade'],
+            hint: 'Feeling unhappy'
+        },
+        { 
+            id: 'e3', category: 'easy', 
+            word: 'angry', emoji: '😡',
+            options: ['angry', 'angrey', 'angri'],
+            hint: 'Feeling very mad'
+        },
+        { 
+            id: 'e4', category: 'easy', 
+            word: 'scared', emoji: '😨',
+            options: ['scared', 'scaird', 'scared'],
+            hint: 'Feeling afraid'
+        },
+        { 
+            id: 'e5', category: 'easy', 
+            word: 'doctor', emoji: '👨‍⚕️',
+            options: ['doctor', 'docter', 'doktor'],
+            hint: 'Helps sick people'
+        },
+        { 
+            id: 'e6', category: 'easy', 
+            word: 'teacher', emoji: '👩‍🏫',
+            options: ['teacher', 'techer', 'teecher'],
+            hint: 'Teaches students'
+        },
+        { 
+            id: 'e7', category: 'easy', 
+            word: 'pilot', emoji: '👨‍✈️',
+            options: ['pilot', 'pilet', 'pilott'],
+            hint: 'Flies airplanes'
+        },
+        { 
+            id: 'e8', category: 'easy', 
+            word: 'cook', emoji: '👨‍🍳',
+            options: ['cook', 'coke', 'cokk'],
+            hint: 'Makes delicious food'
+        },
+
+        // ---- AVERAGE (Emotions & Jobs) ----
+        { 
+            id: 'a1', category: 'average', 
+            word: 'worried', emoji: '😟',
+            options: ['worried', 'woreed', 'worid'],
+            hint: 'Feeling anxious'
+        },
+        { 
+            id: 'a2', category: 'average', 
+            word: 'excited', emoji: '🤩',
+            options: ['excited', 'excitted', 'exsited'],
+            hint: 'Feeling very happy and eager'
+        },
+        { 
+            id: 'a3', category: 'average', 
+            word: 'police', emoji: '👮‍♂️',
+            options: ['police', 'polise', 'polece'],
+            hint: 'Keeps people safe'
+        },
+        { 
+            id: 'a4', category: 'average', 
+            word: 'farmer', emoji: '👨‍🌾',
+            options: ['farmer', 'farmar', 'farmee'],
+            hint: 'Grows crops and raises animals'
+        },
+
+        // ---- DIFFICULT (Emotions & Jobs) ----
+        { 
+            id: 'd1', category: 'difficult', 
+            word: 'peaceful', emoji: '😌',
+            options: ['peaceful', 'peacefull', 'peacful'],
+            hint: 'Feeling calm and relaxed'
+        },
+        { 
+            id: 'd2', category: 'difficult', 
+            word: 'furious', emoji: '🤬',
+            options: ['furious', 'furius', 'furiouss'],
+            hint: 'Very, very angry'
+        },
+        { 
+            id: 'd3', category: 'difficult', 
+            word: 'astronaut', emoji: '🧑‍🚀',
+            options: ['astronaut', 'astronot', 'astranaut'],
+            hint: 'Travels to space'
+        },
+        { 
+            id: 'd4', category: 'difficult', 
+            word: 'detective', emoji: '🕵️‍♂️',
+            options: ['detective', 'detectiv', 'detektive'],
+            hint: 'Solves mysteries'
+        }
     ];
 
-    // The "puzzle" tells us which feeling goes in each grid cell.
-    // We'll generate this randomly each game.
-    // 12 cells (4x3 grid) — each feeling appears 3 times.
-    let puzzle = [];           // Array of feeling ids for each cell
-    let cellStates = [];       // 'empty' or feeling id
-    let selectedFeeling = null; // Currently selected feeling from palette
+    // ---------- COLORS FOR THE PICTURE ----------
+    const COLOR_MAP = {};
+    QUESTION_BANK.forEach((q, idx) => {
+        const colors = ['#f4c542','#f4a261','#457b9d','#6bbf8a','#b58a6b','#e9c46a','#f8f0e0','#d4a0a0'];
+        const colors2 = ['#e6b0b0','#f5cba0','#f7dc6f','#f0b27a'];
+        const colors3 = ['#82e0aa','#d7bde2','#5dade2','#f1948a'];
+        let color;
+        if (q.category === 'easy') color = colors[idx % 8];
+        else if (q.category === 'average') color = colors2[(idx - 8) % 4];
+        else color = colors3[(idx - 12) % 4];
+        COLOR_MAP[q.id] = color;
+    });
+
+    const EMOJI_MAP = {};
+    QUESTION_BANK.forEach(q => { EMOJI_MAP[q.id] = q.emoji; });
+
+    // ---------- GAME STATE ----------
+    let gridData = [];
+    let currentCellIndex = null;
+    let currentQuestion = null;
     let score = 0;
-    let level = 1;
-    let totalCells = 12;
     let coloredCount = 0;
+    const TOTAL_CELLS = 16;
     let gameComplete = false;
+    let isAnswering = false;
+    let isMusicOn = true;
+    let audioContext = null;
+    let musicInterval = null;
 
-    // DOM elements
+    // DOM refs
     const gridContainer = document.getElementById('gridContainer');
-    const paletteContainer = document.getElementById('paletteContainer');
-    const messageBox = document.getElementById('messageBox');
+    const legendContainer = document.getElementById('legendContainer');
     const scoreDisplay = document.getElementById('scoreDisplay');
-    const levelDisplay = document.getElementById('levelDisplay');
     const coloredDisplay = document.getElementById('coloredDisplay');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressFill = document.getElementById('progressFill');
+    const cellNumberDisplay = document.getElementById('cellNumberDisplay');
+    const difficultyBadge = document.getElementById('difficultyBadge');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const feedbackBox = document.getElementById('feedbackBox');
+    const musicToggle = document.getElementById('musicToggle');
 
-    // ---------- HELPER FUNCTIONS ----------
+    // ---------- AI VOICE (Web Speech API) ----------
 
-    // Shuffle an array (Fisher-Yates)
+    function speakWord(word, callback) {
+        if (!window.speechSynthesis) {
+            if (callback) callback();
+            return;
+        }
+
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        // Try to find a good female voice
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Female')) || 
+                           voices.find(v => v.lang === 'en-US') || 
+                           voices[0];
+        if (femaleVoice) utterance.voice = femaleVoice;
+
+        if (callback) {
+            utterance.onend = callback;
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // ---------- BACKGROUND MUSIC (Using Web Audio API) ----------
+
+    function initAudio() {
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log('Audio not supported');
+            return;
+        }
+    }
+
+    function playMusic() {
+        if (!audioContext) {
+            initAudio();
+            if (!audioContext) return;
+        }
+
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+
+        if (musicInterval) {
+            clearInterval(musicInterval);
+            musicInterval = null;
+        }
+
+        if (!isMusicOn) return;
+
+        let noteIndex = 0;
+        // Simple happy melody (C major)
+        const melody = [523, 587, 659, 523, 587, 659, 523, 587, 659, 784, 659, 587];
+        const durations = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
+
+        function playNote() {
+            if (!isMusicOn || !audioContext) return;
+
+            try {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc.type = 'sine';
+                osc.frequency.value = melody[noteIndex % melody.length];
+                gain.gain.setValueAtTime(0.08, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + durations[noteIndex % durations.length]);
+
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + durations[noteIndex % durations.length]);
+
+                noteIndex++;
+            } catch (e) {
+                // Silently handle audio errors
+            }
+        }
+
+        playNote();
+        musicInterval = setInterval(playNote, 500);
+    }
+
+    function stopMusic() {
+        if (musicInterval) {
+            clearInterval(musicInterval);
+            musicInterval = null;
+        }
+        if (audioContext) {
+            try {
+                audioContext.close();
+            } catch (e) {}
+            audioContext = null;
+        }
+    }
+
+    function toggleMusic() {
+        isMusicOn = !isMusicOn;
+        musicToggle.textContent = isMusicOn ? '🔊 Music On' : '🔇 Music Off';
+        if (isMusicOn) {
+            initAudio();
+            playMusic();
+        } else {
+            stopMusic();
+        }
+    }
+
+    // ---------- HELPERS ----------
+
     function shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -382,258 +875,174 @@
         return arr;
     }
 
-    // Generate a new puzzle: 3 of each feeling, shuffled
-    function generatePuzzle() {
-        let ids = [];
-        FEELINGS.forEach(f => {
-            for (let i = 0; i < 3; i++) {
-                ids.push(f.id);
-            }
-        });
-        return shuffleArray(ids);
+    function getQuestionById(id) {
+        return QUESTION_BANK.find(q => q.id === id);
     }
 
-    // Update the stats display
     function updateStats() {
         scoreDisplay.textContent = score;
-        levelDisplay.textContent = level;
-        coloredDisplay.textContent = `${coloredCount}/${totalCells}`;
+        coloredDisplay.textContent = `${coloredCount}/${TOTAL_CELLS}`;
+        const pct = Math.round((coloredCount / TOTAL_CELLS) * 100);
+        progressPercent.textContent = `${pct}%`;
+        progressFill.style.width = `${pct}%`;
     }
 
-    // Show a message
-    function setMessage(text, isGood = true) {
-        messageBox.textContent = text;
-        messageBox.style.color = isGood ? '#1d3557' : '#b63a3a';
+    function setFeedback(text, type = 'info') {
+        feedbackBox.textContent = text;
+        feedbackBox.className = `feedback ${type}`;
     }
 
-    // Check if the player has colored all cells
-    function checkCompletion() {
-        if (coloredCount === totalCells) {
-            gameComplete = true;
-            // Bonus points!
-            const bonus = 10 + level * 2;
-            score += bonus;
-            updateStats();
-            setMessage(`🎉 AMAZING! You colored them all! +${bonus} bonus points! 🎉`, true);
-            // Level up after a short delay
-            setTimeout(() => {
-                level++;
-                setMessage(`🌟 Level ${level} starting! New puzzle!`, true);
-                startNewRound();
-            }, 2000);
-            return true;
-        }
-        return false;
+    // ---------- GENERATE GRID ----------
+
+    function generateGrid() {
+        let allIds = QUESTION_BANK.map(q => q.id);
+        let shuffled = shuffleArray([...allIds]);
+        shuffled = shuffled.slice(0, TOTAL_CELLS);
+
+        gridData = shuffled.map((qId, index) => ({
+            index: index,
+            questionId: qId,
+            colored: false,
+            locked: false,
+            number: index + 1
+        }));
+
+        coloredCount = 0;
+        gameComplete = false;
+        currentCellIndex = null;
+        currentQuestion = null;
+        isAnswering = false;
+        updateStats();
     }
 
-    // ---------- RENDER FUNCTIONS ----------
+    // ---------- RENDER ----------
 
-    // Render the grid
     function renderGrid() {
         gridContainer.innerHTML = '';
-        for (let i = 0; i < totalCells; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'cell';
-            cell.dataset.index = i;
-
-            // If the cell has a feeling assigned, show it
-            if (cellStates[i] !== 'empty') {
-                const feeling = FEELINGS.find(f => f.id === cellStates[i]);
-                if (feeling) {
-                    cell.style.background = feeling.color;
-                    cell.textContent = feeling.emoji;
-                    cell.classList.add('colored');
-                }
+        gridData.forEach((cell, index) => {
+            const div = document.createElement('div');
+            div.className = 'cell';
+            const q = getQuestionById(cell.questionId);
+            if (cell.colored) {
+                div.classList.add('colored');
+                div.style.background = COLOR_MAP[cell.questionId] || '#b08d6a';
+                div.innerHTML = `
+                    <span>${q ? q.emoji : '⭐'}</span>
+                    <span class="label">${q ? q.word : ''}</span>
+                `;
             } else {
-                cell.textContent = '?';
-                cell.style.background = '#e8ddd0';
+                div.style.background = '#f5ede4';
+                div.innerHTML = `
+                    <span>${q ? q.emoji : '❓'}</span>
+                    <span class="label">${q ? q.word : '???'}</span>
+                    <span class="speaker-icon">🔈</span>
+                `;
             }
-
-            cell.addEventListener('click', () => onCellClick(i));
-            gridContainer.appendChild(cell);
-        }
-    }
-
-    // Render the palette (feeling buttons)
-    function renderPalette() {
-        paletteContainer.innerHTML = '';
-        FEELINGS.forEach(feeling => {
-            const btn = document.createElement('div');
-            btn.className = 'color-btn';
-            btn.style.background = feeling.color;
-            btn.dataset.feeling = feeling.id;
-
-            // Show emoji and label
-            btn.innerHTML = `
-                <span class="emoji">${feeling.emoji}</span>
-                <span class="label">${feeling.label}</span>
-            `;
-
-            if (selectedFeeling === feeling.id) {
-                btn.classList.add('active');
+            if (cell.locked) {
+                div.classList.add('locked');
             }
-
-            btn.addEventListener('click', () => onPaletteClick(feeling.id));
-            paletteContainer.appendChild(btn);
+            div.dataset.index = index;
+            div.addEventListener('click', () => onCellClick(index));
+            
+            // Click on speaker icon to hear word
+            const speaker = div.querySelector('.speaker-icon');
+            if (speaker) {
+                speaker.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const qData = getQuestionById(cell.questionId);
+                    if (qData && !cell.colored) {
+                        speakWord(qData.word);
+                        div.classList.add('speaking');
+                        setTimeout(() => div.classList.remove('speaking'), 1500);
+                        setFeedback(`👂 Listening: "${qData.word}"`, 'info');
+                    }
+                });
+            }
+            
+            gridContainer.appendChild(div);
         });
     }
 
-    // Highlight a cell briefly (for hint)
-    function flashCell(index) {
+    function renderLegend() {
+        const categories = ['easy', 'average', 'difficult'];
+        const labels = ['Easy 🟢', 'Average 🟡', 'Difficult 🔴'];
+        legendContainer.innerHTML = '';
+        categories.forEach((cat, idx) => {
+            const item = document.createElement('span');
+            item.className = 'legend-item';
+            const qs = QUESTION_BANK.filter(q => q.category === cat);
+            const color = cat === 'easy' ? '#6bbf8a' : (cat === 'average' ? '#f4c542' : '#e63946');
+            item.innerHTML = `
+                <span class="legend-color" style="background:${color};"></span>
+                ${labels[idx]} (${qs.length})
+            `;
+            legendContainer.appendChild(item);
+        });
+    }
+
+    function highlightCell(index) {
         const cells = gridContainer.children;
-        if (index >= 0 && index < cells.length) {
-            const cell = cells[index];
-            cell.style.transform = 'scale(1.15)';
-            cell.style.boxShadow = '0 0 30px gold';
-            setTimeout(() => {
-                cell.style.transform = '';
-                cell.style.boxShadow = '';
-            }, 600);
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.boxShadow = '';
+            cells[i].style.transform = '';
+        }
+        if (index !== null && index >= 0 && index < cells.length) {
+            cells[index].style.boxShadow = '0 0 30px #ffd700, 0 6px 0 #4a2c1b';
+            cells[index].style.transform = 'scale(1.05)';
         }
     }
 
-    // ---------- GAME ACTIONS ----------
+    // ---------- RENDER OPTIONS ----------
 
-    // Click on a palette color (select a feeling)
-    function onPaletteClick(feelingId) {
-        if (gameComplete) {
-            setMessage('🎯 This round is done! Press "New Game" to play again.', false);
-            return;
-        }
-        selectedFeeling = feelingId;
-        renderPalette();
-        const feeling = FEELINGS.find(f => f.id === feelingId);
-        setMessage(`🖌️ Selected: ${feeling.emoji} ${feeling.label}. Tap a ? square to color it!`, true);
+    function renderOptions(question) {
+        optionsContainer.innerHTML = '';
+        const letters = ['A', 'B', 'C'];
+        const shuffledOptions = shuffleArray([...question.options]);
+        
+        shuffledOptions.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `
+                <span class="letter">${letters[idx]}</span>
+                <span>${opt}</span>
+            `;
+            btn.dataset.value = opt;
+            btn.addEventListener('click', () => onOptionClick(btn, question, opt));
+            optionsContainer.appendChild(btn);
+        });
     }
 
-    // Click on a grid cell
+    // ---------- CELL CLICK ----------
+
     function onCellClick(index) {
+        const cell = gridData[index];
+        if (cell.colored) {
+            setFeedback('✅ This is already completed! Pick another.', 'info');
+            return;
+        }
+        if (cell.locked) {
+            setFeedback('⏳ Please answer the current question first.', 'info');
+            return;
+        }
         if (gameComplete) {
-            setMessage('🎯 Round complete! Press "New Game" for a fresh start.', false);
+            setFeedback('🎉 You completed everything! Press "New Game" to play again.', 'info');
+            return;
+        }
+        if (isAnswering) {
+            setFeedback('⏳ Please finish the current question.', 'info');
             return;
         }
 
-        // If no feeling is selected
-        if (!selectedFeeling) {
-            setMessage('👆 First, pick a feeling from the circles above!', false);
-            return;
-        }
-
-        // If the cell is already colored
-        if (cellStates[index] !== 'empty') {
-            setMessage('⛔ This square is already colored! Pick an empty one.', false);
-            return;
-        }
-
-        // Check if the selected feeling matches the puzzle
-        const correctFeeling = puzzle[index];
-        if (selectedFeeling === correctFeeling) {
-            // Correct! Color the cell.
-            cellStates[index] = selectedFeeling;
-            coloredCount++;
-            score += 5;
-            updateStats();
-
-            // Update the grid
-            renderGrid();
-
-            // Pop animation
-            const cells = gridContainer.children;
-            if (cells[index]) {
-                cells[index].classList.add('completed');
-                setTimeout(() => cells[index].classList.remove('completed'), 500);
-            }
-
-            const feeling = FEELINGS.find(f => f.id === selectedFeeling);
-            setMessage(`✅ Perfect! ${feeling.emoji} ${feeling.label} goes here! +5 points`, true);
-
-            // Check if all cells are colored
-            const completed = checkCompletion();
-            if (!completed) {
-                // Deselect the feeling so they pick a new one
-                selectedFeeling = null;
-                renderPalette();
-            }
-        } else {
-            // Wrong feeling!
-            score = Math.max(0, score - 2);
-            updateStats();
-            const correct = FEELINGS.find(f => f.id === correctFeeling);
-            const chosen = FEELINGS.find(f => f.id === selectedFeeling);
-            setMessage(`❌ Oops! This square needs ${correct.emoji} ${correct.label}, not ${chosen.emoji} ${chosen.label}. -2 points`, false);
-
-            // Shake the cell
-            const cells = gridContainer.children;
-            if (cells[index]) {
-                cells[index].style.transform = 'translateX(-8px)';
-                setTimeout(() => { cells[index].style.transform = 'translateX(8px)'; }, 100);
-                setTimeout(() => { cells[index].style.transform = 'translateX(-8px)'; }, 200);
-                setTimeout(() => { cells[index].style.transform = ''; }, 300);
-            }
-        }
-    }
-
-    // ---------- START A NEW ROUND ----------
-
-    function startNewRound() {
-        puzzle = generatePuzzle();
-        cellStates = new Array(totalCells).fill('empty');
-        coloredCount = 0;
-        gameComplete = false;
-        selectedFeeling = null;
+        currentCellIndex = index;
+        currentQuestion = getQuestionById(cell.questionId);
+        cell.locked = true;
+        isAnswering = true;
         renderGrid();
-        renderPalette();
-        updateStats();
-        setMessage(`🎯 Level ${level} - Match the feelings to the right colors!`, true);
-    }
 
-    // ---------- RESET / NEW GAME ----------
+        const q = currentQuestion;
+        const diffLabel = q.category === 'easy' ? 'Easy 🟢' : (q.category === 'average' ? 'Average 🟡' : 'Difficult 🔴');
+        const diffClass = q.category === 'easy' ? 'diff-easy' : (q.category === 'average' ? 'diff-average' : 'diff-difficult');
 
-    function resetGame() {
-        level = 1;
-        score = 0;
-        selectedFeeling = null;
-        startNewRound();
-        setMessage('🔄 New game started! Pick a feeling and color the squares!', true);
-    }
-
-    // ---------- HINT ----------
-
-    function giveHint() {
-        if (gameComplete) {
-            setMessage('🎉 You already completed this round! Press "New Game".', false);
-            return;
-        }
-
-        // Find the first empty cell
-        const emptyIndex = cellStates.findIndex(state => state === 'empty');
-        if (emptyIndex === -1) {
-            setMessage('🎉 All cells are colored! Great job!', true);
-            return;
-        }
-
-        const correct = puzzle[emptyIndex];
-        const feeling = FEELINGS.find(f => f.id === correct);
-        // Auto-select the correct feeling
-        selectedFeeling = correct;
-        renderPalette();
-        // Flash the cell
-        flashCell(emptyIndex);
-        setMessage(`💡 Hint: Cell ${emptyIndex + 1} needs ${feeling.emoji} ${feeling.label}. It's already selected for you!`, true);
-    }
-
-    // ---------- EVENT LISTENERS ----------
-
-    document.getElementById('newGameBtn').addEventListener('click', resetGame);
-    document.getElementById('hintBtn').addEventListener('click', giveHint);
-
-    // ---------- START THE GAME ----------
-
-    // Initialize everything
-    resetGame();
-
-    console.log('🎨 Color & Feelings Adventure loaded! Grade 4 students, enjoy learning!');
-    console.log('💡 Tip: Match the feeling emoji to the correct square.');
-</script>
-</body>
-</html>
+        cellNumberDisplay.textContent = `🎯 ${q.emoji} ${q.word}`;
+        difficultyBadge.textContent = diffLabel;
+       
