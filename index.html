@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>👦👧 Jobs & Professions - Spelling Challenge</title>
+    <title>🔧 What's My Job? - Tools & Professions</title>
     <style>
         /* ===== MAIN STYLING ===== */
         * {
@@ -26,7 +26,7 @@
             background: #fef9f0;
             border-radius: 60px 60px 30px 30px;
             padding: 25px 25px 35px;
-            max-width: 1100px;
+            max-width: 850px;
             width: 100%;
             box-shadow: 0 25px 40px rgba(0, 0, 0, 0.8);
             border: 6px solid #e8c99b;
@@ -144,342 +144,183 @@
             border-width: 5px;
         }
 
+        /* Main Content */
         .main-area {
             display: flex;
+            flex-direction: column;
             gap: 20px;
-            flex-wrap: wrap;
         }
 
-        /* LEFT: Picture Grid */
-        .picture-container {
-            flex: 1.3;
-            min-width: 300px;
+        /* Picture Display */
+        .picture-display {
             background: #d9c9b0;
-            padding: 18px 15px;
+            padding: 25px;
             border-radius: 40px;
             border: 5px solid #7f5539;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        .cell {
-            aspect-ratio: 1 / 1;
-            border-radius: 20px;
-            border: 4px solid #4a2c1b;
-            background: #f5ede4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 6px 0 #4a2c1b;
-            position: relative;
-            user-select: none;
-            padding: 4px;
-            min-height: 100px;
-            overflow: hidden;
-        }
-
-        .cell .cell-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
-        }
-
-        .cell .cell-emoji {
-            font-size: 3rem;
-        }
-
-        .cell .label {
-            font-size: 0.55rem;
-            font-weight: bold;
-            color: #3d2b1f;
-            background: rgba(255,255,255,0.9);
-            padding: 2px 8px;
-            border-radius: 20px;
             text-align: center;
+            position: relative;
+        }
+
+        .picture-display .question-number {
             position: absolute;
-            bottom: 4px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap;
-            z-index: 2;
-        }
-
-        .cell .team-badge {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            font-size: 1.2rem;
-            background: white;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #4a2c1b;
-            z-index: 3;
-        }
-
-        .cell .cell-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            border-radius: 16px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            z-index: 1;
-        }
-
-        .cell .cell-overlay .lock-icon {
-            font-size: 2.5rem;
-        }
-
-        .cell.locked .cell-overlay {
-            display: flex;
-        }
-
-        .cell:active:not(.colored-boy):not(.colored-girl):not(.locked) {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #4a2c1b;
-        }
-
-        .cell.colored-boy {
-            border-color: #4a90d9;
-            box-shadow: 0 4px 0 #3a70a9;
-            transform: translateY(2px);
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .cell.colored-girl {
-            border-color: #ff6b6b;
-            box-shadow: 0 4px 0 #c94a4a;
-            transform: translateY(2px);
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .cell.colored-boy::after,
-        .cell.colored-girl::after {
-            content: '✅';
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            font-size: 1.2rem;
-            z-index: 4;
-        }
-
-        .cell.completed {
-            animation: pop 0.4s ease;
-        }
-
-        .cell.locked {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #4a2c1b;
-            pointer-events: none;
-        }
-
-        .cell .speaker-icon {
-            font-size: 0.7rem;
             background: #2d1b0e;
             color: white;
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
+            padding: 4px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .picture-frame {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            border: 4px solid #4a2c1b;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            cursor: pointer;
-            pointer-events: auto;
-            z-index: 5;
-            border: 2px solid white;
+            flex-direction: column;
         }
 
-        .cell .speaker-icon:hover {
-            background: #4a3222;
-            transform: scale(1.1);
+        .picture-frame .main-image {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 20px;
         }
 
-        .cell .speaker-icon.disabled-speaker {
-            opacity: 0.4;
-            cursor: not-allowed;
-            pointer-events: none;
+        .picture-frame .emoji-display {
+            font-size: 8rem;
+            line-height: 1;
         }
 
-        .cell.speaking {
-            animation: pulse 0.5s ease 3;
-            border-color: #ffd700;
-            box-shadow: 0 0 30px #ffd700, 0 6px 0 #4a2c1b;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        @keyframes pop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        /* RIGHT: Question Panel */
-        .question-panel {
-            flex: 1;
-            min-width: 260px;
+        .picture-frame .tool-label {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3d2b1f;
             background: #f5ede4;
-            border-radius: 40px;
-            padding: 20px 18px;
-            border: 5px solid #b08d6a;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .question-header {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #5c4033;
-            background: #eddcd2;
-            padding: 6px 12px;
+            padding: 6px 20px;
             border-radius: 30px;
-            margin-bottom: 12px;
+            margin-top: 10px;
+            border: 2px dashed #b08d6a;
         }
 
-        .question-header .difficulty {
-            display: inline-block;
-            padding: 2px 14px;
-            border-radius: 30px;
-            font-weight: bold;
+        .picture-frame .hint-text {
+            font-size: 1rem;
+            color: #6b4f3a;
+            margin-top: 8px;
+            font-style: italic;
         }
 
-        .diff-easy { background: #6bbf8a; color: #1a3a2a; }
-        .diff-average { background: #f4c542; color: #3d2b1f; }
-        .diff-difficult { background: #e63946; color: white; }
-
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #1d3557;
-            text-align: center;
-            padding: 12px 5px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff9f0;
-            border-radius: 30px;
-            border: 3px dashed #b08d6a;
-            margin-bottom: 12px;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .question-text .question-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #b08d6a;
-            margin-bottom: 4px;
-        }
-
-        .question-text .word-hint {
-            font-size: 0.9rem;
-            color: #5c4033;
-            background: #eddcd2;
-            padding: 4px 16px;
-            border-radius: 30px;
-        }
-
-        .question-text .listen-btn {
+        .picture-frame .listen-btn {
             background: #4a90d9;
             color: white;
             border: none;
-            padding: 8px 24px;
+            padding: 10px 30px;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
             font-family: inherit;
-            margin-top: 4px;
+            margin-top: 10px;
             border-bottom: 4px solid #3a70a9;
             transition: 0.1s;
         }
 
-        .question-text .listen-btn:active {
+        .picture-frame .listen-btn:active {
             transform: translateY(3px);
             border-bottom-width: 1px;
         }
 
-        .question-text .listen-btn:disabled {
+        .picture-frame .listen-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 3px solid #4a2c1b;
+            background: #e8ddd0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        .dot.completed-boy {
+            background: #4a90d9;
+            border-color: #3a70a9;
+            color: white;
+        }
+
+        .dot.completed-girl {
+            background: #ff6b6b;
+            border-color: #c94a4a;
+            color: white;
+        }
+
+        .dot.locked {
+            opacity: 0.5;
+        }
+
         /* Multiple Choice Options */
         .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 10px 0;
         }
 
         .option-btn {
-            padding: 14px 20px;
+            padding: 16px 20px;
             border-radius: 30px;
             border: 4px solid #b08d6a;
             background: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
             font-family: inherit;
-            text-align: left;
+            text-align: center;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
         }
 
         .option-btn:hover:not(:disabled) {
-            transform: scale(1.02);
+            transform: scale(1.03);
             background: #f5ede4;
         }
 
         .option-btn:active:not(:disabled) {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
-        .option-btn .letter {
-            background: #2d1b0e;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+        .option-btn .opt-emoji {
+            font-size: 1.5rem;
         }
 
         .option-btn.correct {
@@ -506,18 +347,18 @@
         }
 
         .feedback {
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 30px;
             text-align: center;
             font-weight: bold;
             font-size: 1rem;
-            min-height: 50px;
+            min-height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #eddcd2;
             border: 3px solid #b08d6a;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
 
         .feedback.correct {
@@ -603,6 +444,7 @@
 
         .btn-green { background: #2a9d8f; border-bottom-color: #1f6d62; }
         .btn-blue { background: #4a90d9; border-bottom-color: #3a70a9; }
+        .btn-orange { background: #e76f51; border-bottom-color: #b85a3f; }
 
         .footer {
             text-align: center;
@@ -614,35 +456,6 @@
             border-radius: 30px;
         }
 
-        .legend {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            font-size: 0.8rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #eddcd2;
-            padding: 3px 14px;
-            border-radius: 20px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid #4a2c1b;
-        }
-
-        .legend-boy { background: #4a90d9; }
-        .legend-girl { background: #ff6b6b; }
-
-        /* Turn indicator */
         .turn-indicator {
             text-align: center;
             font-size: 1.2rem;
@@ -723,26 +536,22 @@
             margin-top: 10px;
         }
 
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
         @media (max-width: 700px) {
-            .main-area {
-                flex-direction: column;
+            .options {
+                grid-template-columns: 1fr;
             }
-            .grid {
-                grid-template-columns: repeat(4, 1fr);
+            .picture-frame .emoji-display {
+                font-size: 5rem;
             }
-            .cell {
-                min-height: 80px;
-            }
-            .cell .cell-emoji {
-                font-size: 2rem;
-            }
-            .question-text {
-                font-size: 1.1rem;
-                min-height: 60px;
-            }
-            .option-btn {
-                font-size: 1rem;
-                padding: 10px 16px;
+            .picture-frame .main-image {
+                max-width: 150px;
+                max-height: 150px;
             }
             .team-scores {
                 flex-direction: row;
@@ -758,6 +567,11 @@
                 font-size: 1rem;
                 padding: 8px 12px;
             }
+            .dot {
+                width: 24px;
+                height: 24px;
+                font-size: 0.6rem;
+            }
         }
     </style>
 </head>
@@ -772,7 +586,7 @@
             <div>👦 Boys: <span class="score-num" id="finalBoyScore">0</span></div>
             <div>👧 Girls: <span class="score-num" id="finalGirlScore">0</span></div>
         </div>
-        <div class="sub-text" id="winnerMessage">Amazing spelling skills!</div>
+        <div class="sub-text" id="winnerMessage">Amazing job knowledge!</div>
         <button class="btn btn-green" onclick="resetGame()">🔄 Play Again</button>
     </div>
 </div>
@@ -781,13 +595,13 @@
 
     <div class="banner">
         👦 Boys vs Girls 👧
-        <span>💼 Jobs & Professions</span>
+        <span>🔧 What's My Job?</span>
         <button class="music-toggle" id="musicToggle">🔊 Music On</button>
     </div>
 
-    <h1>📝 Spelling Challenge</h1>
+    <h1>🔨 Tools & Professions</h1>
     <div class="sub-wrap">
-        <div class="sub">👂 Listen to the AI voice, choose the correct spelling!</div>
+        <div class="sub">🔍 Look at the tool, guess the job!</div>
     </div>
 
     <!-- Team Scores -->
@@ -811,226 +625,254 @@
 
     <div class="main-area">
 
-        <!-- LEFT: Picture Grid -->
-        <div class="picture-container">
-            <div class="grid" id="gridContainer"></div>
-            <div class="legend" id="legendContainer"></div>
+        <!-- Picture Display -->
+        <div class="picture-display">
+            <div class="question-number" id="questionNumber">Question 1 / 16</div>
+            <div class="picture-frame" id="pictureFrame">
+                <div id="imageDisplay">
+                    <div class="emoji-display">🔧</div>
+                    <div class="tool-label">Click "Start" to begin!</div>
+                    <div class="hint-text">👆 Press the button below</div>
+                </div>
+                <button class="listen-btn" id="listenBtn" style="display:none;">🔊 Listen</button>
+            </div>
         </div>
 
-        <!-- RIGHT: Question Panel -->
-        <div class="question-panel">
-            <div>
-                <div class="question-header">
-                    <span id="cellNumberDisplay">🎯 Click a picture!</span>
-                    <span class="difficulty" id="difficultyBadge">-</span>
-                </div>
+        <!-- Progress Dots -->
+        <div class="progress-dots" id="progressDots"></div>
 
-                <div class="question-text" id="questionText">
-                    <span>👆 Tap a picture to start!</span>
-                </div>
+        <!-- Multiple Choice Options -->
+        <div class="options" id="optionsContainer">
+            <!-- Options will be generated -->
+        </div>
 
-                <div class="options" id="optionsContainer">
-                    <!-- Options will be generated -->
-                </div>
+        <!-- Feedback -->
+        <div class="feedback info" id="feedbackBox">
+            💡 Click "New Question" to start the game!
+        </div>
 
-                <div class="feedback info" id="feedbackBox">
-                    💡 Click the speaker 🔈 to hear the word again!
-                </div>
-            </div>
-
-            <div>
-                <div style="font-size:0.85rem; text-align:center; color:#5c4033; margin-bottom:6px;">
-                    🟢 Easy · 🟡 Average · 🔴 Difficult
-                </div>
-                <div class="controls">
-                    <button class="btn btn-blue" id="switchTeamBtn">🔄 Switch Turn</button>
-                    <button class="btn btn-green" id="resetBtn">🔄 New Game</button>
-                </div>
-            </div>
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-blue" id="switchTeamBtn">🔄 Switch Turn</button>
+            <button class="btn btn-green" id="nextBtn">➡️ Next Question</button>
+            <button class="btn btn-orange" id="resetBtn">🔄 New Game</button>
         </div>
     </div>
 
     <div class="footer">
-        🌟 Listen 👂 → Choose the correct spelling ✏️ → Score for your team! &nbsp;|&nbsp; Grade 4 🧒
+        🌟 Look at the tool 🔧 → Guess the job 💼 → Score for your team! &nbsp;|&nbsp; Grade 4 🧒
     </div>
 </div>
 
 <script>
     // ============================================================
-    //  JOBS & PROFESSIONS - SPELLING CHALLENGE
-    //  Grade 4 - Listen, Choose the Correct Spelling
-    //  WITH PICTURES FROM DEEPSEEK GENERATED URLs
+    //  WHAT'S MY JOB? - TOOLS & PROFESSIONS CHALLENGE
+    //  Grade 4 - Look at the tool, guess the job!
     // ============================================================
 
-    // ---------- QUESTION BANK - JOBS & PROFESSIONS ----------
+    // ---------- QUESTION BANK - Tools & Professions ----------
     const QUESTION_BANK = [
-        // ---- EASY (8 Jobs) ----
+        // ---- EASY (6) ----
         { 
             id: 'e1', category: 'easy', 
-            word: 'doctor',
-            emoji: '👨‍⚕️',
-            image: 'https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg',
-            options: ['doctor', 'docter', 'doktor'],
-            hint: 'Helps sick people get better'
+            tool: '🩺 Stethoscope',
+            emoji: '🩺',
+            image: 'https://img.freepik.com/free-vector/stethoscope-medical-tool_1284-14983.jpg',
+            job: 'Doctor',
+            jobEmoji: '👨‍⚕️',
+            options: ['Doctor', 'Teacher', 'Pilot', 'Cook'],
+            hint: 'Used to listen to heartbeats'
         },
         { 
             id: 'e2', category: 'easy', 
-            word: 'teacher',
-            emoji: '👩‍🏫',
-            image: 'https://img.freepik.com/free-vector/teacher-character-background_1270-87.jpg',
-            options: ['teacher', 'techer', 'teecher'],
-            hint: 'Teaches students in a classroom'
+            tool: '✏️ Chalkboard',
+            emoji: '✏️',
+            image: 'https://img.freepik.com/free-vector/blackboard-school-supplies_1284-14851.jpg',
+            job: 'Teacher',
+            jobEmoji: '👩‍🏫',
+            options: ['Teacher', 'Doctor', 'Police', 'Farmer'],
+            hint: 'Used to write lessons for students'
         },
         { 
             id: 'e3', category: 'easy', 
-            word: 'pilot',
-            emoji: '👨‍✈️',
-            image: 'https://img.freepik.com/free-vector/pilot-character-background_1270-86.jpg',
-            options: ['pilot', 'pilet', 'pilott'],
-            hint: 'Flies airplanes in the sky'
+            tool: '✈️ Airplane',
+            emoji: '✈️',
+            image: 'https://img.freepik.com/free-vector/airplane-vector_1284-14852.jpg',
+            job: 'Pilot',
+            jobEmoji: '👨‍✈️',
+            options: ['Pilot', 'Driver', 'Sailor', 'Fireman'],
+            hint: 'Flies high in the sky'
         },
         { 
             id: 'e4', category: 'easy', 
-            word: 'cook',
-            emoji: '👨‍🍳',
-            image: 'https://img.freepik.com/free-vector/chef-character-background_1270-83.jpg',
-            options: ['cook', 'coke', 'cokk'],
-            hint: 'Makes delicious food in a kitchen'
+            tool: '🍳 Frying Pan',
+            emoji: '🍳',
+            image: 'https://img.freepik.com/free-vector/frying-pan-cooking_1284-14853.jpg',
+            job: 'Cook',
+            jobEmoji: '👨‍🍳',
+            options: ['Cook', 'Baker', 'Waiter', 'Farmer'],
+            hint: 'Used to cook delicious meals'
         },
         { 
             id: 'e5', category: 'easy', 
-            word: 'police',
-            emoji: '👮‍♂️',
-            image: 'https://img.freepik.com/free-vector/police-officer-character-background_1270-85.jpg',
-            options: ['police', 'polise', 'polece'],
-            hint: 'Keeps people safe and catches bad guys'
+            tool: '🚓 Police Car',
+            emoji: '🚓',
+            image: 'https://img.freepik.com/free-vector/police-car-vector_1284-14854.jpg',
+            job: 'Police',
+            jobEmoji: '👮‍♂️',
+            options: ['Police', 'Fireman', 'Ambulance', 'Teacher'],
+            hint: 'Has flashing lights and a siren'
         },
         { 
             id: 'e6', category: 'easy', 
-            word: 'farmer',
-            emoji: '👨‍🌾',
-            image: 'https://img.freepik.com/free-vector/farmer-character-background_1270-82.jpg',
-            options: ['farmer', 'farmar', 'farmee'],
-            hint: 'Grows crops and raises animals'
-        },
-        { 
-            id: 'e7', category: 'easy', 
-            word: 'fireman',
-            emoji: '🧑‍🚒',
-            image: 'https://img.freepik.com/free-vector/firefighter-character-background_1270-81.jpg',
-            options: ['fireman', 'firemen', 'firman'],
-            hint: 'Puts out fires and saves people'
-        },
-        { 
-            id: 'e8', category: 'easy', 
-            word: 'nurse',
-            emoji: '👩‍⚕️',
-            image: 'https://img.freepik.com/free-vector/nurse-character-background_1270-80.jpg',
-            options: ['nurse', 'nerse', 'nurce'],
-            hint: 'Cares for sick people in a hospital'
+            tool: '🚜 Tractor',
+            emoji: '🚜',
+            image: 'https://img.freepik.com/free-vector/tractor-vector_1284-14855.jpg',
+            job: 'Farmer',
+            jobEmoji: '👨‍🌾',
+            options: ['Farmer', 'Driver', 'Mechanic', 'Pilot'],
+            hint: 'Used to plow fields and grow crops'
         },
 
-        // ---- AVERAGE (4 Jobs) ----
+        // ---- AVERAGE (5) ----
         { 
             id: 'a1', category: 'average', 
-            word: 'astronaut',
-            emoji: '🧑‍🚀',
-            image: 'https://img.freepik.com/free-vector/astronaut-character-background_1270-79.jpg',
-            options: ['astronaut', 'astronot', 'astranaut'],
-            hint: 'Travels to space and explores planets'
+            tool: '🚒 Fire Truck',
+            emoji: '🚒',
+            image: 'https://img.freepik.com/free-vector/fire-truck-vector_1284-14856.jpg',
+            job: 'Fireman',
+            jobEmoji: '🧑‍🚒',
+            options: ['Fireman', 'Police', 'Ambulance', 'Pilot'],
+            hint: 'Has a long ladder and water hose'
         },
         { 
             id: 'a2', category: 'average', 
-            word: 'detective',
-            emoji: '🕵️‍♂️',
-            image: 'https://img.freepik.com/free-vector/detective-character-background_1270-78.jpg',
-            options: ['detective', 'detectiv', 'detektive'],
-            hint: 'Solves mysteries and finds clues'
+            tool: '💉 Syringe',
+            emoji: '💉',
+            image: 'https://img.freepik.com/free-vector/syringe-vector_1284-14857.jpg',
+            job: 'Nurse',
+            jobEmoji: '👩‍⚕️',
+            options: ['Nurse', 'Doctor', 'Dentist', 'Veterinarian'],
+            hint: 'Used to give medicine shots'
         },
         { 
             id: 'a3', category: 'average', 
-            word: 'dentist',
-            emoji: '🦷',
-            image: 'https://img.freepik.com/free-vector/dentist-character-background_1270-77.jpg',
-            options: ['dentist', 'dentest', 'dentast'],
-            hint: 'Takes care of teeth and smiles'
+            tool: '🪐 Telescope',
+            emoji: '🔭',
+            image: 'https://img.freepik.com/free-vector/telescope-vector_1284-14858.jpg',
+            job: 'Astronaut',
+            jobEmoji: '🧑‍🚀',
+            options: ['Astronaut', 'Pilot', 'Scientist', 'Teacher'],
+            hint: 'Used to look at stars and planets'
         },
         { 
             id: 'a4', category: 'average', 
-            word: 'veterinarian',
-            emoji: '🐾',
-            image: 'https://img.freepik.com/free-vector/veterinarian-character-background_1270-76.jpg',
-            options: ['veterinarian', 'veterinarian', 'veteranarian'],
-            hint: 'Doctor for animals and pets'
+            tool: '🔍 Magnifying Glass',
+            emoji: '🔍',
+            image: 'https://img.freepik.com/free-vector/magnifying-glass-vector_1284-14859.jpg',
+            job: 'Detective',
+            jobEmoji: '🕵️‍♂️',
+            options: ['Detective', 'Scientist', 'Teacher', 'Police'],
+            hint: 'Used to find clues and solve mysteries'
+        },
+        { 
+            id: 'a5', category: 'average', 
+            tool: '🦷 Dental Mirror',
+            emoji: '🦷',
+            image: 'https://img.freepik.com/free-vector/dental-mirror-vector_1284-14860.jpg',
+            job: 'Dentist',
+            jobEmoji: '🦷',
+            options: ['Dentist', 'Doctor', 'Nurse', 'Veterinarian'],
+            hint: 'Used to check teeth and gums'
         },
 
-        // ---- DIFFICULT (4 Jobs) ----
+        // ---- DIFFICULT (5) ----
         { 
             id: 'd1', category: 'difficult', 
-            word: 'architect',
-            emoji: '🏗️',
-            image: 'https://img.freepik.com/free-vector/architect-character-background_1270-75.jpg',
-            options: ['architect', 'architecht', 'arkitect'],
-            hint: 'Designs buildings and houses'
+            tool: '📐 Blueprint',
+            emoji: '📐',
+            image: 'https://img.freepik.com/free-vector/blueprint-vector_1284-14861.jpg',
+            job: 'Architect',
+            jobEmoji: '🏗️',
+            options: ['Architect', 'Engineer', 'Builder', 'Designer'],
+            hint: 'Used to design buildings and houses'
         },
         { 
             id: 'd2', category: 'difficult', 
-            word: 'engineer',
-            emoji: '👷',
-            image: 'https://img.freepik.com/free-vector/engineer-character-background_1270-74.jpg',
-            options: ['engineer', 'engeneer', 'enginear'],
-            hint: 'Builds roads, bridges, and machines'
+            tool: '⚙️ Gears',
+            emoji: '⚙️',
+            image: 'https://img.freepik.com/free-vector/gears-vector_1284-14862.jpg',
+            job: 'Engineer',
+            jobEmoji: '👷',
+            options: ['Engineer', 'Mechanic', 'Architect', 'Scientist'],
+            hint: 'Used to build machines and engines'
         },
         { 
             id: 'd3', category: 'difficult', 
-            word: 'scientist',
+            tool: '🔬 Microscope',
             emoji: '🔬',
-            image: 'https://img.freepik.com/free-vector/scientist-character-background_1270-73.jpg',
-            options: ['scientist', 'sientist', 'sciantist'],
-            hint: 'Does experiments and discovers new things'
+            image: 'https://img.freepik.com/free-vector/microscope-vector_1284-14863.jpg',
+            job: 'Scientist',
+            jobEmoji: '🔬',
+            options: ['Scientist', 'Doctor', 'Teacher', 'Detective'],
+            hint: 'Used to see tiny things like cells'
         },
         { 
             id: 'd4', category: 'difficult', 
-            word: 'journalist',
-            emoji: '📰',
-            image: 'https://img.freepik.com/free-vector/journalist-character-background_1270-72.jpg',
-            options: ['journalist', 'jornalist', 'journlist'],
-            hint: 'Writes news stories for newspapers'
+            tool: '📝 Notebook & Pen',
+            emoji: '📝',
+            image: 'https://img.freepik.com/free-vector/notebook-pen-vector_1284-14864.jpg',
+            job: 'Journalist',
+            jobEmoji: '📰',
+            options: ['Journalist', 'Teacher', 'Writer', 'Detective'],
+            hint: 'Used to write news stories'
+        },
+        { 
+            id: 'd5', category: 'difficult', 
+            tool: '🐾 Animal Stethoscope',
+            emoji: '🐾',
+            image: 'https://img.freepik.com/free-vector/veterinarian-tools-vector_1284-14865.jpg',
+            job: 'Veterinarian',
+            jobEmoji: '🐾',
+            options: ['Veterinarian', 'Doctor', 'Nurse', 'Farmer'],
+            hint: 'Used to check animals\' health'
         }
     ];
 
     // ---------- GAME STATE ----------
     let gridData = [];
-    let currentCellIndex = null;
+    let currentIndex = 0;
     let currentQuestion = null;
     let boysScore = 0;
     let girlsScore = 0;
-    let coloredCount = 0;
-    const TOTAL_CELLS = 16;
+    let answeredCount = 0;
+    const TOTAL_QUESTIONS = 16;
     let gameComplete = false;
     let isAnswering = false;
     let currentTeam = 'boys';
     let isMusicOn = true;
     let audioContext = null;
     let musicInterval = null;
+    let shuffledQuestions = [];
 
     // DOM refs
-    const gridContainer = document.getElementById('gridContainer');
-    const legendContainer = document.getElementById('legendContainer');
     const boysScoreDisplay = document.getElementById('boysScore');
     const girlsScoreDisplay = document.getElementById('girlsScore');
     const progressFill = document.getElementById('progressFill');
-    const cellNumberDisplay = document.getElementById('cellNumberDisplay');
-    const difficultyBadge = document.getElementById('difficultyBadge');
-    const questionText = document.getElementById('questionText');
+    const questionNumber = document.getElementById('questionNumber');
+    const imageDisplay = document.getElementById('imageDisplay');
+    const pictureFrame = document.getElementById('pictureFrame');
+    const listenBtn = document.getElementById('listenBtn');
     const optionsContainer = document.getElementById('optionsContainer');
     const feedbackBox = document.getElementById('feedbackBox');
     const musicToggle = document.getElementById('musicToggle');
     const turnIndicator = document.getElementById('turnIndicator');
     const boysCard = document.getElementById('boysCard');
     const girlsCard = document.getElementById('girlsCard');
+    const progressDots = document.getElementById('progressDots');
     const winnerOverlay = document.getElementById('winnerOverlay');
     const switchTeamBtn = document.getElementById('switchTeamBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const resetBtn = document.getElementById('resetBtn');
 
     // ---------- AI VOICE ----------
@@ -1147,14 +989,10 @@
         return arr;
     }
 
-    function getQuestionById(id) {
-        return QUESTION_BANK.find(q => q.id === id);
-    }
-
     function updateStats() {
         boysScoreDisplay.textContent = boysScore;
         girlsScoreDisplay.textContent = girlsScore;
-        const pct = Math.round((coloredCount / TOTAL_CELLS) * 100);
+        const pct = Math.round((answeredCount / TOTAL_QUESTIONS) * 100);
         progressFill.style.width = `${pct}%`;
     }
 
@@ -1189,137 +1027,123 @@
         currentTeam = currentTeam === 'boys' ? 'girls' : 'boys';
         updateTurn();
         setFeedback(`🔄 Switched to ${currentTeam === 'boys' ? 'Boys' : 'Girls'}' turn!`, 'info');
-        
-        gridData.forEach(cell => {
-            if (!cell.colored) {
-                cell.locked = false;
-            }
-        });
-        renderGrid();
-        
-        currentCellIndex = null;
-        currentQuestion = null;
-        isAnswering = false;
-        cellNumberDisplay.textContent = '🎯 Click a picture!';
-        difficultyBadge.textContent = '-';
-        difficultyBadge.className = 'difficulty';
-        questionText.innerHTML = `<span>👆 Tap a picture to start!</span>`;
-        optionsContainer.innerHTML = '';
     }
 
-    // ---------- GENERATE GRID ----------
-    function generateGrid() {
+    // ---------- RENDER PROGRESS DOTS ----------
+    function renderDots() {
+        progressDots.innerHTML = '';
+        for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.textContent = i + 1;
+            
+            if (i === currentIndex && !gameComplete) {
+                dot.classList.add('active');
+            }
+            
+            if (gridData[i] && gridData[i].answered) {
+                dot.classList.add(gridData[i].team === 'boys' ? 'completed-boy' : 'completed-girl');
+            }
+            
+            progressDots.appendChild(dot);
+        }
+    }
+
+    // ---------- GENERATE QUESTIONS ----------
+    function generateQuestions() {
         let allIds = QUESTION_BANK.map(q => q.id);
         let shuffled = shuffleArray([...allIds]);
-        shuffled = shuffled.slice(0, TOTAL_CELLS);
+        shuffled = shuffled.slice(0, TOTAL_QUESTIONS);
 
         gridData = shuffled.map((qId, index) => ({
             index: index,
             questionId: qId,
-            colored: false,
-            locked: false,
+            answered: false,
             team: null,
             number: index + 1
         }));
 
-        coloredCount = 0;
+        // Shuffle the options for each question
+        shuffledQuestions = gridData.map(item => {
+            const q = getQuestionById(item.questionId);
+            return {
+                ...q,
+                shuffledOptions: shuffleArray([...q.options])
+            };
+        });
+
+        answeredCount = 0;
         gameComplete = false;
-        currentCellIndex = null;
-        currentQuestion = null;
+        currentIndex = 0;
         isAnswering = false;
         updateStats();
+        renderDots();
     }
 
-    // ---------- RENDER ----------
-    function renderGrid() {
-        gridContainer.innerHTML = '';
-        gridData.forEach((cell, index) => {
-            const div = document.createElement('div');
-            div.className = 'cell';
-            const q = getQuestionById(cell.questionId);
-            
-            if (cell.colored) {
-                div.classList.add(cell.team === 'boys' ? 'colored-boy' : 'colored-girl');
-                div.style.background = cell.team === 'boys' ? '#b8d4f0' : '#f5c8d8';
-                div.innerHTML = `
-                    <img src="${q ? q.image : ''}" class="cell-image" alt="${q ? q.word : ''}" />
-                    <span class="label">${q ? q.word : ''}</span>
-                `;
-            } else {
-                div.style.background = '#f5ede4';
-                div.innerHTML = `
-                    <img src="${q ? q.image : ''}" class="cell-image" alt="${q ? q.word : ''}" />
-                    <span class="label">${q ? q.word : '???'}</span>
-                    <span class="speaker-icon">🔈</span>
-                    <div class="cell-overlay"><span class="lock-icon">🔒</span></div>
-                `;
-            }
-            
-            if (cell.locked) {
-                div.classList.add('locked');
-            }
-            
-            div.dataset.index = index;
-            div.addEventListener('click', () => onCellClick(index));
-            
-            const speaker = div.querySelector('.speaker-icon');
-            if (speaker) {
-                speaker.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const qData = getQuestionById(cell.questionId);
-                    if (qData && !cell.colored && !cell.locked) {
-                        speakWord(qData.word);
-                        div.classList.add('speaking');
-                        setTimeout(() => div.classList.remove('speaking'), 1500);
-                        setFeedback(`👂 Listening: "${qData.word}"`, 'info');
-                    }
-                });
-            }
-            
-            gridContainer.appendChild(div);
-        });
+    function getQuestionById(id) {
+        return QUESTION_BANK.find(q => q.id === id);
     }
 
-    function renderLegend() {
-        const categories = ['easy', 'average', 'difficult'];
-        const labels = ['Easy 🟢', 'Average 🟡', 'Difficult 🔴'];
-        legendContainer.innerHTML = '';
-        categories.forEach((cat, idx) => {
-            const item = document.createElement('span');
-            item.className = 'legend-item';
-            const qs = QUESTION_BANK.filter(q => q.category === cat);
-            const color = cat === 'easy' ? '#6bbf8a' : (cat === 'average' ? '#f4c542' : '#e63946');
-            item.innerHTML = `
-                <span class="legend-color" style="background:${color};"></span>
-                ${labels[idx]} (${qs.length})
-            `;
-            legendContainer.appendChild(item);
-        });
-    }
-
-    function highlightCell(index) {
-        const cells = gridContainer.children;
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].style.boxShadow = '';
-            cells[i].style.transform = '';
+    // ---------- LOAD QUESTION ----------
+    function loadQuestion(index) {
+        if (index >= TOTAL_QUESTIONS || gameComplete) {
+            if (answeredCount === TOTAL_QUESTIONS) {
+                showWinner();
+            }
+            return;
         }
-        if (index !== null && index >= 0 && index < cells.length) {
-            cells[index].style.boxShadow = '0 0 30px #ffd700, 0 6px 0 #4a2c1b';
-            cells[index].style.transform = 'scale(1.05)';
-        }
+
+        const item = shuffledQuestions[index];
+        if (!item) return;
+
+        currentQuestion = item;
+        isAnswering = false;
+        
+        // Update question number
+        questionNumber.textContent = `Question ${index + 1} / ${TOTAL_QUESTIONS}`;
+
+        // Show the tool picture
+        imageDisplay.innerHTML = `
+            <div class="emoji-display">${item.emoji}</div>
+            <div class="tool-label">🔧 ${item.tool}</div>
+            <div class="hint-text">💡 ${item.hint}</div>
+        `;
+
+        // Show listen button
+        listenBtn.style.display = 'inline-block';
+        listenBtn.disabled = false;
+        listenBtn.onclick = () => {
+            speakWord(item.tool);
+            listenBtn.textContent = '🔊 Listening...';
+            listenBtn.disabled = true;
+            setTimeout(() => {
+                listenBtn.textContent = '🔊 Listen Again';
+                listenBtn.disabled = false;
+            }, 2000);
+        };
+
+        // Render options
+        renderOptions(item);
+
+        // Update dots
+        renderDots();
+        
+        // Enable next button
+        nextBtn.disabled = true;
+        
+        setFeedback(`🔍 What job uses this tool? Choose the correct answer!`, 'info');
     }
 
     // ---------- RENDER OPTIONS ----------
     function renderOptions(question) {
         optionsContainer.innerHTML = '';
-        const letters = ['A', 'B', 'C'];
-        const shuffledOptions = shuffleArray([...question.options]);
+        const letters = ['A', 'B', 'C', 'D'];
         
-        shuffledOptions.forEach((opt, idx) => {
+        question.shuffledOptions.forEach((opt, idx) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
             btn.innerHTML = `
-                <span class="letter">${letters[idx]}</span>
+                <span class="opt-emoji">${letters[idx]}</span>
                 <span>${opt}</span>
             `;
             btn.dataset.value = opt;
@@ -1328,74 +1152,25 @@
         });
     }
 
-    // ---------- CELL CLICK ----------
-    function onCellClick(index) {
-        const cell = gridData[index];
-        
-        if (gameComplete) {
-            setFeedback('🎉 You completed everything! Press "New Game" to play again.', 'info');
-            return;
-        }
-        
-        if (cell.colored) {
-            setFeedback('✅ This is already completed! Pick another.', 'info');
-            return;
-        }
-        
-        if (cell.locked) {
-            setFeedback('⏳ Please answer the current question first.', 'info');
-            return;
-        }
-        
-        if (isAnswering) {
-            setFeedback('⏳ Please finish the current question first.', 'info');
-            return;
-        }
-
-        cell.locked = true;
-        currentCellIndex = index;
-        currentQuestion = getQuestionById(cell.questionId);
-        isAnswering = true;
-        renderGrid();
-
-        const q = currentQuestion;
-        const diffLabel = q.category === 'easy' ? 'Easy 🟢' : (q.category === 'average' ? 'Average 🟡' : 'Difficult 🔴');
-        const diffClass = q.category === 'easy' ? 'diff-easy' : (q.category === 'average' ? 'diff-average' : 'diff-difficult');
-
-        cellNumberDisplay.textContent = `💼 ${q.word}`;
-        difficultyBadge.textContent = diffLabel;
-        difficultyBadge.className = `difficulty ${diffClass}`;
-
-        questionText.innerHTML = `
-            <img src="${q.image}" class="question-image" alt="${q.word}" />
-            <span>What is this job called?</span>
-            <span class="word-hint">💡 ${q.hint}</span>
-            <button class="listen-btn" onclick="speakWord('${q.word}')">🔊 Listen to "${q.word}"</button>
-        `;
-
-        renderOptions(q);
-        setFeedback(`🔤 Choose the correct spelling for this job!`, 'info');
-        highlightCell(index);
-    }
-
     // ---------- OPTION CLICK ----------
     function onOptionClick(btn, question, selectedValue) {
-        if (isAnswering === false) return;
+        if (isAnswering) return;
         if (btn.disabled) return;
+        if (gridData[currentIndex].answered) return;
 
         const allOptions = optionsContainer.querySelectorAll('.option-btn');
         allOptions.forEach(b => b.disabled = true);
 
-        const isCorrect = selectedValue === question.word;
+        isAnswering = true;
+        const isCorrect = selectedValue === question.job;
 
         if (isCorrect) {
             btn.classList.add('correct');
             
-            const cell = gridData[currentCellIndex];
-            cell.colored = true;
-            cell.locked = false;
-            cell.team = currentTeam;
-            coloredCount++;
+            // Mark as answered
+            gridData[currentIndex].answered = true;
+            gridData[currentIndex].team = currentTeam;
+            answeredCount++;
             
             const points = question.category === 'easy' ? 10 : (question.category === 'average' ? 20 : 30);
             if (currentTeam === 'boys') {
@@ -1405,80 +1180,78 @@
             }
             updateStats();
 
-            setFeedback(`✅ Correct! +${points} points for ${currentTeam === 'boys' ? 'Boys' : 'Girls'}! 🎉`, 
+            setFeedback(`✅ Correct! It's a ${question.jobEmoji} ${question.job}! +${points} points for ${currentTeam === 'boys' ? 'Boys' : 'Girls'}! 🎉`, 
                        currentTeam === 'boys' ? 'team-boy' : 'team-girl');
 
-            const cells = gridContainer.children;
-            if (cells[currentCellIndex]) {
-                cells[currentCellIndex].classList.add('completed');
-                setTimeout(() => cells[currentCellIndex].classList.remove('completed'), 500);
-            }
+            // Update dots
+            renderDots();
 
-            renderGrid();
-            highlightCell(null);
+            // Enable next button
+            nextBtn.disabled = false;
 
-            currentCellIndex = null;
-            currentQuestion = null;
-            isAnswering = false;
-            cellNumberDisplay.textContent = '🎯 Click a picture!';
-            difficultyBadge.textContent = '-';
-            difficultyBadge.className = 'difficulty';
-            questionText.innerHTML = `<span>👆 Tap another picture to continue!</span>`;
-            optionsContainer.innerHTML = '';
+            // Auto switch team after correct answer
+            setTimeout(() => {
+                if (!gameComplete) {
+                    currentTeam = currentTeam === 'boys' ? 'girls' : 'boys';
+                    updateTurn();
+                }
+            }, 500);
 
-            if (coloredCount === TOTAL_CELLS) {
+            // Check if all questions answered
+            if (answeredCount === TOTAL_QUESTIONS) {
                 gameComplete = true;
-                showWinner();
-                return;
+                setTimeout(showWinner, 1500);
             }
 
-            setTimeout(autoSelectNext, 800);
-            
         } else {
             btn.classList.add('wrong');
             setFeedback(`❌ "${selectedValue}" is not correct. Try again!`, 'wrong');
 
+            // Show correct answer after a moment
             setTimeout(() => {
                 allOptions.forEach(b => {
-                    if (b.dataset.value === question.word) {
+                    if (b.dataset.value === question.job) {
                         b.classList.add('reveal-correct');
                     }
                 });
-                setFeedback(`💡 The correct spelling is "${question.word}". Click the picture again!`, 'info');
+                setFeedback(`💡 The correct answer is ${question.jobEmoji} ${question.job}. Click "Next Question" to continue.`, 'info');
                 
-                setTimeout(() => {
-                    const cell = gridData[currentCellIndex];
-                    if (cell) {
-                        cell.locked = false;
-                        isAnswering = false;
-                        renderGrid();
-                        optionsContainer.innerHTML = '';
-                        questionText.innerHTML = `<span>👆 Tap the picture again to try again!</span>`;
-                        setFeedback(`📝 Click the picture to try again.`, 'info');
-                        highlightCell(null);
-                        cellNumberDisplay.textContent = '🎯 Click a picture!';
-                        difficultyBadge.textContent = '-';
-                        difficultyBadge.className = 'difficulty';
-                    }
-                }, 1500);
+                // Re-enable options so they can see the correct answer
+                // But don't allow clicking again
+                nextBtn.disabled = false;
+                isAnswering = false;
             }, 1000);
         }
     }
 
-    // ---------- AUTO-SELECT NEXT ----------
-    function autoSelectNext() {
-        if (gameComplete || isAnswering) return;
+    // ---------- NEXT QUESTION ----------
+    function nextQuestion() {
+        if (gameComplete) return;
         
-        const index = gridData.findIndex(cell => !cell.colored && !cell.locked);
-        if (index !== -1) {
-            onCellClick(index);
-        } else {
-            const allColored = gridData.every(cell => cell.colored);
-            if (allColored && !gameComplete) {
+        // Move to next unanswered question
+        let nextIndex = currentIndex + 1;
+        while (nextIndex < TOTAL_QUESTIONS && gridData[nextIndex].answered) {
+            nextIndex++;
+        }
+        
+        if (nextIndex >= TOTAL_QUESTIONS) {
+            // Check if all are answered
+            if (answeredCount === TOTAL_QUESTIONS) {
                 gameComplete = true;
                 showWinner();
+            } else {
+                // Find first unanswered
+                const firstUnanswered = gridData.findIndex(item => !item.answered);
+                if (firstUnanswered !== -1) {
+                    currentIndex = firstUnanswered;
+                    loadQuestion(currentIndex);
+                }
             }
+            return;
         }
+        
+        currentIndex = nextIndex;
+        loadQuestion(currentIndex);
     }
 
     // ---------- SHOW WINNER ----------
@@ -1493,15 +1266,15 @@
         if (finalBoys > finalGirls) {
             winnerEmoji = '👦🏆';
             winnerTitle = '🎉 Boys Win!';
-            winnerMessage = 'Great spelling, boys! You are job experts!';
+            winnerMessage = 'Great job knowledge, boys! You are career experts!';
         } else if (finalGirls > finalBoys) {
             winnerEmoji = '👧🏆';
             winnerTitle = '🎉 Girls Win!';
-            winnerMessage = 'Amazing spelling, girls! You are job experts!';
+            winnerMessage = 'Amazing job knowledge, girls! You are career experts!';
         } else {
             winnerEmoji = '🤝';
             winnerTitle = '🤝 It\'s a Tie!';
-            winnerMessage = 'Both teams are spelling champions! Great job everyone!';
+            winnerMessage = 'Both teams are job experts! Great job everyone!';
         }
         
         document.getElementById('winnerEmoji').textContent = winnerEmoji;
@@ -1516,30 +1289,25 @@
         
         boysScore = 0;
         girlsScore = 0;
-        coloredCount = 0;
+        answeredCount = 0;
         gameComplete = false;
         isAnswering = false;
         currentTeam = 'boys';
-        currentCellIndex = null;
-        currentQuestion = null;
+        currentIndex = 0;
         
-        generateGrid();
-        renderGrid();
-        renderLegend();
+        generateQuestions();
+        renderDots();
         updateStats();
         updateTurn();
-        
-        cellNumberDisplay.textContent = '🎯 Click a picture!';
-        difficultyBadge.textContent = '-';
-        difficultyBadge.className = 'difficulty';
-        questionText.innerHTML = `<span>👆 Tap a picture to start!</span>`;
-        optionsContainer.innerHTML = '';
-        setFeedback('🔄 New game started! Boys go first!', 'info');
+        loadQuestion(0);
+        nextBtn.disabled = true;
+        setFeedback('🔄 New game started! Boys go first! Look at the tool and guess the job!', 'info');
     }
 
     // ---------- EVENT LISTENERS ----------
     musicToggle.addEventListener('click', toggleMusic);
     switchTeamBtn.addEventListener('click', switchTeam);
+    nextBtn.addEventListener('click', nextQuestion);
     resetBtn.addEventListener('click', resetGame);
 
     // Load voices
@@ -1549,12 +1317,13 @@
     };
 
     // ---------- START THE GAME ----------
-    generateGrid();
-    renderGrid();
-    renderLegend();
+    generateQuestions();
+    renderDots();
     updateStats();
     updateTurn();
-    setFeedback('👦 Boys go first! Click a picture to start!', 'info');
+    loadQuestion(0);
+    nextBtn.disabled = true;
+    setFeedback('👦 Boys go first! Look at the tool and guess the job!', 'info');
 
     // Start music
     document.addEventListener('click', function initMusic() {
@@ -1565,8 +1334,8 @@
         document.removeEventListener('click', initMusic);
     }, { once: true });
 
-    console.log('💼 Jobs & Professions - Spelling Challenge!');
-    console.log('📚 16 jobs to learn and spell');
+    console.log('🔧 What\'s My Job? - Tools & Professions Challenge!');
+    console.log('📚 16 tools to identify and match to jobs');
     console.log('👦👧 Boys vs Girls - Who will win?');
 </script>
 </body>
